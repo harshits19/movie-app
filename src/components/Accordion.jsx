@@ -10,7 +10,7 @@ const AccordionItem = ({ item, activeIndex, handleToggle }) => {
         onClick={() => {
           handleToggle(item?.id);
         }}
-        className="bg-[#2d2d2d] hover:bg-[#414141] hover:ease-[cubic-bezier(0.5,0,0.1,1)] ease-[cubic-bezier(0.9,0,0.51,1)] duration-[250ms] transition-[background-color] flex p-6 items-center justify-between lg:text-2xl text-lg text-left lg:font-medium font-normal cursor-pointer">
+        className="bg-[#2d2d2d] hover:bg-[#414141] hover:ease-ogTransHover ease-ogTrans duration-250ms transition-bgColor flex p-6 items-center justify-between lg:text-2xl text-lg text-left lg:font-medium font-normal cursor-pointer">
         {item?.title}
         <span className="">
           <PlusIcon
@@ -27,7 +27,7 @@ const AccordionItem = ({ item, activeIndex, handleToggle }) => {
             (activeIndex === item?.id
               ? "visible max-h-[36rem] py-6"
               : "collapse max-h-0 py-0") +
-            " bg-[#2d2d2d] mb-[0.55rem] mt-0.5 px-6 transition-all ease-[cubic-bezier(0.5,0,0.1,1)] duration-[0.25s] delay-0 overflow-hidden"
+            " bg-[#2d2d2d] mb-[0.55rem] mt-0.5 px-6 transition-all ease-ogTransHover duration-[0.25s] delay-0 overflow-hidden"
           }
           ref={currItem}>
           <pre className="lg:text-2xl text-lg leading-6 lg:font-medium font-normal text-left font-sans whitespace-pre-wrap break-words">

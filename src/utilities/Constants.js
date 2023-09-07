@@ -1,3 +1,43 @@
+export const HpBannerImg = [
+  "https://assets.nflxext.com/ffe/siteui/vlv3/855ed6e2-d9f1-4afd-90da-96023ec747c3/85eb5b91-25ed-4965-ace9-ba8e4a0ead8d/IN-en-20230828-popsignuptwoweeks-perspective_alpha_website_large.jpg",
+  "https://assets.nflxext.com/ffe/siteui/vlv3/42df4e1f-bef6-499e-87ff-c990584de314/5e7c383c-1f88-4983-b4da-06e14c0984ba/IN-en-20230904-popsignuptwoweeks-perspective_alpha_website_large.jpg",
+];
+export const HpSectionData = {
+  items: [
+    {
+      id: 1,
+      title: "Enjoy on your TV",
+      description:
+        "Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.",
+      imgURL:
+        "https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/tv.png",
+    },
+    {
+      id: 2,
+      title: "Download your shows to watch offline",
+      description:
+        "Save your favourites easily and always have something to watch.",
+      imgURL:
+        "https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/mobile-0819.jpg",
+    },
+    {
+      id: 3,
+      title: "Watch everywhere",
+      description:
+        "Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.",
+      imgURL:
+        "https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/device-pile-in.png",
+    },
+    {
+      id: 4,
+      title: "Create profiles for kids",
+      description:
+        "Send children on adventures with their favourite characters in a space made just for them—free with your membership.",
+      imgURL:
+        "https://occ-0-5298-3647.1.nflxso.net/dnm/api/v6/19OhWN2dO19C9txTON9tvTFtefw/AAAABVr8nYuAg0xDpXDv0VI9HUoH7r2aGp4TKRCsKNQrMwxzTtr-NlwOHeS8bCI2oeZddmu3nMYr3j9MjYhHyjBASb1FaOGYZNYvPBCL.png?r=54d",
+    },
+  ],
+};
 export const AccordionData = {
   items: [
     {
