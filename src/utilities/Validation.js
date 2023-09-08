@@ -9,7 +9,7 @@ export const validatePassword = (text, setPassError) => {
   result ? setPassError(false) : setPassError(true);
 };
 export const validateName = (text, setNameError) => {
-  let regex = /^[a-zA-Z0-9-!@#$%^&*]{4,}$/;
+  let regex = /^[a-zA-Z0-9- +!@#$%^&*]{4,}$/;
   let result = regex.test(text);
   result ? setNameError(false) : setNameError(true);
 };

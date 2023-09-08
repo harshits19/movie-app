@@ -31,7 +31,7 @@ const HomePageSections = ({ data, first, second }) => {
 };
 
 const LandingPage = () => {
-  const { userSignupEmail, setUserSignupEmail } = useContext(UserEmailContext);
+  const { setUserSignupEmail } = useContext(UserEmailContext);
   const navigator = useNavigate();
   const inputRef = useRef();
   const inputRefTwo = useRef();
@@ -39,65 +39,69 @@ const LandingPage = () => {
     setUserSignupEmail({
       email: inputRef?.current?.value || inputRefTwo?.current?.value,
     });
-    if (userSignupEmail?.email) navigator("/login");
+    if (inputRef?.current?.value || inputRefTwo?.current?.value)
+      navigator("/login");
   };
   return (
-    <div>
+    <div className="">
       <div className="h-full w-full lg:px-36 sm:px-10 px-6 lg:pb-10 pb-0 relative overflow-hidden bg-[#00000066] bg-gradient-to-t from-[#000000cc] from-0% via-transparent via-60% to-[#000000cc] to-100% text-white">
-        <img
-          src={HpBannerImg[1]}
-          className="mix-blend-overlay object-cover absolute w-full h-full scale-125 -translate-y-[10%] -z-10"
-        />
-        <div className="flex flex-col">
-          <div className="flex justify-between items-center sm:pt-0 pt-6">
-            <OGlogo classList="sm:h-20 sm:w-36 h-6 w-18 relative" />
-            <div>
-              <span className="p-2 h-20  m-2">English</span>
-              <Link to="/login" className="no-underline">
-                <span className="px-4 py-[6px] text-[14px] font-medium  rounded bg-ogRed hover:bg-ogRedHover hover:ease-ogTransHover ease-ogTrans duration-250ms transition-bgColor relative inline-flex cursor-pointer">
-                  Sign In
-                </span>
-              </Link>
-            </div>
-          </div>
-          <div className="text-center lg:p-40 p-20 lg:px-14 sm:px-0 px-4 text-white">
-            <div className="lg:text-5xl text-3xl font-bold relative">
-              The biggest Indian hits. Ready to watch here from ₹ 149.
-            </div>
-            <div className="mt-4 sm:text-2xl text-lg sm:font-normal font-medium">
-              Join today. Cancel anytime.
-            </div>
-            <div className="mt-4 sm:text-xl text-lg sm:font-normal font-medium">
-              Ready to watch? Enter your email to create or restart your
-              membership.
-            </div>
-            <form
-              className="flex justify-center pt-5 sm:px-10 px-0 gap-y-3 flex-wrap"
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleFormSubmit();
-              }}>
-              <div className="bg-[#161616b3] flex-auto sm:min-w-[12rem] sm:max-w-[23rem] min-w-full">
-                <input
-                  name="email"
-                  type="email"
-                  placeholder="Email address"
-                  className="bg-transparent w-full  p-4 rounded border border-solid border-[#808080b3] text-base font-normal text-white outline-none"
-                  ref={inputRef}
-                />
+        <div className="">
+          <img
+            src={HpBannerImg[1]}
+            className="mix-blend-overlay object-cover absolute w-full h-full scale-125 -translate-y-[10%] -z-10"
+          />
+          {/* <div className="mix-blend-overlay object-cover absolute w-full h-full scale-125 -translate-y-[10%] -z-20" /> */}
+          <div className="flex flex-col">
+            <div className="flex justify-between items-center sm:pt-0 pt-6">
+              <OGlogo classList="sm:h-20 sm:w-36 h-6 w-18 relative" />
+              <div>
+                <span className="p-2 h-20  m-2">English</span>
+                <Link to="/login" className="no-underline">
+                  <span className="px-4 py-[6px] text-[14px] font-medium  rounded bg-ogRed hover:bg-ogRedHover hover:ease-ogTransHover ease-ogTrans duration-250ms transition-bgColor relative inline-flex cursor-pointer">
+                    Sign In
+                  </span>
+                </Link>
               </div>
-              <button
-                onClick={(e) => {
+            </div>
+            <div className="text-center lg:p-40 p-20 lg:px-14 sm:px-0 px-4 text-white">
+              <div className="lg:text-5xl text-3xl font-bold relative">
+                The biggest Indian hits. Ready to watch here from ₹ 149.
+              </div>
+              <div className="mt-4 sm:text-2xl text-lg sm:font-normal font-medium">
+                Join today. Cancel anytime.
+              </div>
+              <div className="mt-4 sm:text-xl text-lg sm:font-normal font-medium">
+                Ready to watch? Enter your email to create or restart your
+                membership.
+              </div>
+              <form
+                className="flex justify-center pt-5 sm:px-10 px-0 gap-y-3 flex-wrap"
+                onSubmit={(e) => {
                   e.preventDefault();
                   handleFormSubmit();
-                }}
-                className="flex items-center px-6 sm:py-0 py-2 sm:ml-2 ml-0 max-w-fit bg-ogRed hover:bg-ogRedHover hover:ease-ogTransHover ease-ogTrans duration-250ms transition-bgColor rounded-md font-medium sm:text-2xl text-[1.3rem] cursor-pointer">
-                Get Started
-                <span>
-                  <ChevronRight classList={"fill-white"} />
-                </span>
-              </button>
-            </form>
+                }}>
+                <div className="bg-[#161616b3] flex-auto sm:min-w-[12rem] sm:max-w-[23rem] min-w-full">
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="Email address"
+                    className="bg-transparent w-full  p-4 rounded border border-solid border-[#808080b3] text-base font-normal text-white outline-none"
+                    ref={inputRef}
+                  />
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleFormSubmit();
+                  }}
+                  className="flex items-center px-6 sm:py-0 py-2 sm:ml-2 ml-0 max-w-fit bg-ogRed hover:bg-ogRedHover hover:ease-ogTransHover ease-ogTrans duration-250ms transition-bgColor rounded-md font-medium sm:text-2xl text-[1.3rem] cursor-pointer">
+                  Get Started
+                  <span>
+                    <ChevronRight classList={"fill-white"} />
+                  </span>
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

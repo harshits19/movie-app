@@ -1,28 +1,25 @@
-import React from "react";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import Body from "./components/Body";
 import AuthPage from "./components/AuthPage";
 import HomePage from "./components/HomePage";
 import LandingPage from "./components/LandingPage";
-import { UserEmailContext, CurrentUserContext } from "./utilities/UserContext";
+import store from "./utilities/Store";
 
 const App = () => {
-  const [userSignupEmail, setUserSignupEmail] = React.useState({});
-  const [currentUser, setCurrentUser] = React.useState({});
   return (
-    <UserEmailContext.Provider value={{ userSignupEmail, setUserSignupEmail }}>
-      <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
-        <RouterProvider router={appRouter}>
-          <Outlet />
-        </RouterProvider>
-      </CurrentUserContext.Provider>
-    </UserEmailContext.Provider>
+    <Provider store={store}>
+      <RouterProvider router={appRouter}>
+        <Body />
+      </RouterProvider>
+    </Provider>
   );
 };
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Outlet />,
+    element: <Body />,
     children: [
       {
         path: "/",

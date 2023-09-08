@@ -1,6 +1,13 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { UserEmailContext, CurrentUserContext } from "../utilities/UserContext";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utilities/UserSlice";
+import { UserEmailContext } from "../utilities/UserContext";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import {
   validateEmail,
   validatePassword,
@@ -10,17 +17,9 @@ import { OGlogo } from "../assets/SVGs";
 import { HpBannerImg } from "../utilities/Constants";
 import ErrorBox from "./ErrorBox";
 import { auth } from "../utilities/Firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
 
 const AuthPage = () => {
   const { userSignupEmail } = useContext(UserEmailContext);
-  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-  const [emailVal, setEmailVal] = useState(userSignupEmail?.email || "");
-  const [passVal, setPassVal] = useState("");
-  const [nameVal, setNameVal] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passError, setPassError] = useState(false);
   const [nameError, setNameError] = useState(false);
@@ -29,39 +28,51 @@ const AuthPage = () => {
   const [show, setShow] = useState(true);
   const nameRef = useRef();
   const emailRef = useRef();
-  const passwordRef = useRef();
-  const navigate = useNavigate();
+  const passRef = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (userSignupEmail.email) setAuthState("signup");
+    emailRef.current.value = userSignupEmail?.email || "";
   }, []);
   const toggleVisibility = () => {
-    passwordRef.current.type === "password"
-      ? (passwordRef.current.type = "text")
-      : (passwordRef.current.type = "password");
+    passRef.current.type === "password"
+      ? (passRef.current.type = "text")
+      : (passRef.current.type = "password");
     setShow(!show);
   };
 
   const handleAuth = () => {
-    if (authState == "signup" && nameVal && emailVal && passVal)
-      createUserWithEmailAndPassword(auth, emailVal, passVal)
+    if (authState == "signup" && nameRef && emailRef.current.value && passRef)
+      createUserWithEmailAndPassword(
+        auth,
+        emailRef?.current?.value,
+        passRef?.current?.value
+      )
         .then((user) => {
-          setCurrentUser({ email: user?.user?.email });
+          updateProfile(user?.user, {
+            displayName: nameRef?.current?.value,
+          })
+            .then(() => {
+              const { email, displayName } = auth.currentUser;
+              dispatch(addUser({ email: email, name: displayName }));
+            })
+            .catch((error) => {
+              console.log(error.code);
+            });
           setAuthState("login");
-          navigate("/home");
         })
         .catch((err) => {
-          console.log(err.code);
           setAuthError(err.code);
         });
-    else if (authState == "login" && emailVal && passVal)
-      signInWithEmailAndPassword(auth, emailVal, passVal)
-        .then((user) => {
-          setCurrentUser({ email: user?.user?.email });
-          navigate("/home");
-        })
+    else if (authState == "login" && emailRef.current.value && passRef)
+      signInWithEmailAndPassword(
+        auth,
+        emailRef?.current?.value,
+        passRef?.current?.value
+      )
+        .then((user) => {})
         .catch((err) => {
-          console.log(err.code);
           setAuthError(err.code);
         });
   };
@@ -101,10 +112,10 @@ const AuthPage = () => {
                     name="name"
                     type="text"
                     placeholder="Name"
-                    value={nameVal}
                     ref={nameRef}
-                    onChange={(e) => setNameVal(e.target.value)}
-                    onBlur={() => validateName(nameVal, setNameError)}
+                    onBlur={() =>
+                      validateName(nameRef?.current?.value, setNameError)
+                    }
                   />
                   {nameError && (
                     <div className="text-[13px] leading-[13px] pt-2 text-[#e87c03]">
@@ -123,11 +134,9 @@ const AuthPage = () => {
                   type="email"
                   placeholder="Email Address"
                   ref={emailRef}
-                  value={emailVal}
-                  onChange={(e) => {
-                    setEmailVal(e.target.value);
-                  }}
-                  onBlur={() => validateEmail(emailVal, setEmailError)}
+                  onBlur={() =>
+                    validateEmail(emailRef?.current?.value, setEmailError)
+                  }
                 />
                 {emailError && (
                   <div className="text-[13px] leading-[13px] pt-2 text-[#e87c03]">
@@ -144,18 +153,16 @@ const AuthPage = () => {
                   name="password"
                   type="password"
                   placeholder="Password"
-                  value={passVal}
-                  ref={passwordRef}
-                  onChange={(e) => setPassVal(e.target.value)}
-                  onBlur={() => validatePassword(passVal, setPassError)}
+                  ref={passRef}
+                  onBlur={() =>
+                    validatePassword(passRef?.current?.value, setPassError)
+                  }
                 />
-                {passVal.length > 0 && (
-                  <span
-                    className="absolute right-0 top-[14px] px-2 text-sm text-[#8c8c8c] cursor-pointer"
-                    onClick={toggleVisibility}>
-                    {show ? "SHOW" : "HIDE"}
-                  </span>
-                )}
+                <span
+                  className="absolute right-0 top-[14px] px-2 text-sm text-[#8c8c8c] cursor-pointer"
+                  onClick={toggleVisibility}>
+                  {show ? "SHOW" : "HIDE"}
+                </span>
                 {passError && (
                   <div className="text-[13px] leading-[13px] pt-2 text-[#e87c03]">
                     Your password must contain between 4 and 60 characters.
