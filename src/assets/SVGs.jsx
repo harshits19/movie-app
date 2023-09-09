@@ -32,13 +32,3 @@ export const PlusIcon = ({ classList }) => {
     </svg>
   );
 };
-export const CrossIcon = ({ classList }) => {
-  return (
-    <svg viewBox="0 0 24 24" alt="">
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M11 11V2H13V11H22V13H13V22H11V13H2V11H11Z"></path>
-    </svg>
-  );
-};

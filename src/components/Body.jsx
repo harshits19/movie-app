@@ -13,7 +13,7 @@ const Body = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const eventHandle = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(addUser({ email: user.email, name: user.displayName }));
         navigate("/home");
@@ -21,7 +21,9 @@ const Body = () => {
         dispatch(removeUser());
       }
     });
+    return () => eventHandle();
   }, []);
+
   return (
     <div>
       <UserEmailContext.Provider

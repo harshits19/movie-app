@@ -1,6 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import { auth } from "../utilities/Firebase";
 import { signOut } from "firebase/auth";
-import { Navigate, useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const navigate = useNavigate();
