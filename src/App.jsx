@@ -1,9 +1,11 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import Body from "./components/Body";
 import AuthPage from "./pages/AuthPage";
-import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
+const HomePage = lazy(() => import("./pages/HomePage"));
+import ErrorPage from "./pages/ErrorPage";
 import store from "./utilities/Store";
 
 const App = () => {
@@ -20,6 +22,7 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <Body />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -27,7 +30,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/home",
-        element: <HomePage />,
+        element: (
+          <Suspense>
+            <HomePage />
+          </Suspense>
+        ),
       },
       { path: "/login", element: <AuthPage /> },
     ],

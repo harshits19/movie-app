@@ -5,7 +5,7 @@ import Accordion from "../components/Accordion";
 import { HpBannerImg, HpSectionData } from "../utilities/Constants";
 import { OGlogo, ChevronRight } from "../assets/SVGs";
 import { UserEmailContext } from "../utilities/UserContext";
-import HomePageSections from "../components/HomePageSections";
+import LandingPageSections from "../components/LandingPageSections";
 
 const LandingPage = () => {
   const { setUserSignupEmail } = useContext(UserEmailContext);
@@ -89,17 +89,17 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="w-full bg-[#232323] h-2"></div>
-      <HomePageSections data={HpSectionData?.items[0]} />
+      <LandingPageSections data={HpSectionData?.items[0]} />
       <div className="w-full bg-[#232323] h-2"></div>
-      <HomePageSections
+      <LandingPageSections
         data={HpSectionData?.items[1]}
         first={"lg:order-1"}
         second={"lg:order-2"}
       />
       <div className="w-full bg-[#232323] h-2"></div>
-      <HomePageSections data={HpSectionData?.items[2]} />
+      <LandingPageSections data={HpSectionData?.items[2]} />
       <div className="w-full bg-[#232323] h-2"></div>
-      <HomePageSections
+      <LandingPageSections
         data={HpSectionData?.items[3]}
         first={"lg:order-1"}
         second={"lg:order-2"}

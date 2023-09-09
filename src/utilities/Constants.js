@@ -78,3 +78,17 @@ export const AccordionData = {
     },
   ],
 };
+export const ProfileDpData = {
+  items: [
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABQLE78HOjF1_2nkm44Bg9TZFhoKsLZckfq01Apnk6XXJwiTRGGXLrEyDhyhQqzvdEd7TCvntLCe0XtOFK-qMdA0zjQO57HmyTw.png?r=85b",
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABeKmsTiFrCGj6QTnFHw89IaNC7_KxW-G20Af8S42eDOuKlGsUm40uCrNdtQ0-w9BwUbLeOnIhAnliAbW6EPlhEkm8CKGC5MXXQ.png?r=bba",
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABZLyb430y4UtBTwHUKOeUt7ESSCyiG_sbTy6lnLzLB0XS3VjiJ8HcN9Fa67VjtbXr2k-eP1vDIfszx69-ebMOD0k5ilaLtXgjQ.png?r=69d",
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABcLl64QO0_zZb4mJdxgtNc9vcARuM1p_HHwJ9Spmpx4mlIJ75i_AW_lVvufzrya6gpSKrZSa6OKVFUocqbLZKJhSw4aqk4coqQ.png?r=d20",
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABc0A649iMeYs7HeiolJPT71464yUkh7AHWnlZiDdSoCBp5vgi5eKZXT2F5Do4NE781BAlJ_v92rZMbJXkQAY4cBOybzEqK011w.png?r=97e",
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABcO_3eCf2OGHuHzv7cwMS-g0fkNQ7lJNUTkbmgtuFWO_P8A0FTTPhaA0PDBCPA-kGWDonHQbjebBKPu70No3TzWOaF-hrC_xog.png?r=800",
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABWbleRSgUyL7oN4E4wXqCoHtYt7XhoititCMtB-9BsdwxhBCP6AJVDx7-uK4zxZfqK2jF7VjNqCuTMzWrj9WRBESepIq-RxHBg.png?r=a82",
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABe5JfP3XHifvBqFvhbCiUR5dNWDam56hjBBEMS4endG6koIehYPc2afCmpYUrfCJYyjmOjV3_m0OFRmhzclaHD6iDABA4lW7dQ.png?r=181",
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABQ_SE8nWtfunDbhH1YG2VNnQJdnGTuKXLFy-1034EbiGTd6jjUI30f7XesxyYxHnkR1go22UblG8DtezXfrJFT8lHsZgUatfJw.png?r=ddf",
+    "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABSwgTGdQ10_g7S40OTUOZyuo_rI67XiWBqLuavAUpwPLHazdnhEqlQVhNoNpU9N5s7ffdmHsrDYYBsCT2UAGXXi2ppwi_kU0Qg.png?r=5eb",
+  ],
+};

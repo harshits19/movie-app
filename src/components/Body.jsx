@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { UserEmailContext } from "../utilities/UserContext";
 import { useDispatch } from "react-redux";
@@ -15,7 +15,13 @@ const Body = () => {
   useEffect(() => {
     const eventHandle = onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(addUser({ email: user.email, name: user.displayName }));
+        dispatch(
+          addUser({
+            email: user.email,
+            name: user.displayName,
+            photoURL: user.photoURL,
+          })
+        );
         navigate("/home");
       } else {
         dispatch(removeUser());
@@ -25,12 +31,12 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <UserEmailContext.Provider
         value={{ userSignupEmail, setUserSignupEmail }}>
         <Outlet />
       </UserEmailContext.Provider>
-    </div>
+    </>
   );
 };
 

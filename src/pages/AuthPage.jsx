@@ -16,7 +16,7 @@ import {
 import ErrorBox from "../components/ErrorBox";
 import { auth } from "../utilities/Firebase";
 import { OGlogo } from "../assets/SVGs";
-import { HpBannerImg } from "../utilities/Constants";
+import { HpBannerImg, ProfileDpData } from "../utilities/Constants";
 import Spinner from "../assets/spinner.svg";
 
 const AuthPage = () => {
@@ -62,10 +62,13 @@ const AuthPage = () => {
           setLoading(false);
           updateProfile(user?.user, {
             displayName: nameRef?.current?.value,
+            photoURL: ProfileDpData?.items[Math.floor(Math.random() * 10)],
           })
             .then(() => {
-              const { email, displayName } = auth.currentUser;
-              dispatch(addUser({ email: email, name: displayName }));
+              const { email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({ email: email, name: displayName, photoURL: photoURL })
+              );
             })
             .catch((error) => {
               console.log(error.code);
@@ -109,7 +112,7 @@ const AuthPage = () => {
             <div className="absolute inset-0" />
           </div>
         </div>
-        <div className="absolute left-0 right-0 mx-4 md:mx-10 pt-6 md:pt-0 md:bg-transparent bg-black">
+        <div className="absolute left-0 right-0 mx-4 md:mx-10 pt-6 md:pt-4 md:bg-transparent bg-black">
           <Link to="/">
             <OGlogo classList="md:h-[45px] md:w-[167px] h-8 w-18 relative" />
           </Link>

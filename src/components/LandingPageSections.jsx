@@ -1,4 +1,4 @@
-const HomePageSections = ({ data, first, second }) => {
+const LandingPageSections = ({ data, first, second }) => {
   const { title, description, imgURL } = data;
   return (
     <div className="w-full h-full lg:py-16 py-14 bg-[#000000] text-white">
@@ -21,4 +21,4 @@ const HomePageSections = ({ data, first, second }) => {
     </div>
   );
 };
-export default HomePageSections;
+export default LandingPageSections;
