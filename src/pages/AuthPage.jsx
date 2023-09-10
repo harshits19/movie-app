@@ -16,8 +16,14 @@ import {
 import ErrorBox from "../components/ErrorBox";
 import { auth } from "../utilities/Firebase";
 import { OGlogo } from "../assets/SVGs";
-import { HpBannerImg, ProfileDpData } from "../utilities/Constants";
+import { AuthPageData, ProfileDpData } from "../utilities/Constants";
 import Spinner from "../assets/spinner.svg";
+
+const InputValidator = ({ text }) => {
+  return (
+    <div className="text-[13px] leading-[13px] pt-2 text-[#e87c03]">{text}</div>
+  );
+};
 
 const AuthPage = () => {
   const { userSignupEmail, setUserSignupEmail } = useContext(UserEmailContext);
@@ -106,7 +112,7 @@ const AuthPage = () => {
         <div className="absolute inset-0 md:block hidden">
           <div className="relative h-full w-full overflow-hidden ">
             <img
-              src={HpBannerImg[1]}
+              src={AuthPageData?.bgImages?.urlOne}
               className="object-cover opacity-50 w-full h-full scale-125 -translate-y-[10%]"
             />
             <div className="absolute inset-0" />
@@ -121,10 +127,16 @@ const AuthPage = () => {
           <div className="md:min-h-[630px] min-h-[540px] md:px-[68px] md:pt-[60px] md:pb-10 px-0 pt-5 pb-[30px] m-0 bg-[#000000bf] rounded flex flex-col w-full box-border ">
             <div className="grow">
               <div className="text-[32px] font-medium mb-7 text-white">
-                {authState == "login" ? "Sign In" : "Sign up"}
+                {authState == "login"
+                  ? AuthPageData["en"].formSection?.formTitle?.signin
+                  : AuthPageData["en"].formSection?.formTitle?.signup}
               </div>
               {authError && (
-                <ErrorBox authError={authError} setAuthState={setAuthState} />
+                <ErrorBox
+                  authError={authError}
+                  setAuthState={setAuthState}
+                  text={AuthPageData["en"].errorBoxText}
+                />
               )}
               <form
                 onSubmit={(e) => {
@@ -140,16 +152,20 @@ const AuthPage = () => {
                       }
                       name="name"
                       type="text"
-                      placeholder="Name"
+                      placeholder={
+                        AuthPageData["en"].formSection?.placeholderText?.name
+                      }
                       ref={nameRef}
                       onBlur={() =>
                         validateName(nameRef?.current?.value, setNameError)
                       }
                     />
                     {nameError && (
-                      <div className="text-[13px] leading-[13px] pt-2 text-[#e87c03]">
-                        Your name must contain between 4 and 60 characters.
-                      </div>
+                      <InputValidator
+                        text={
+                          AuthPageData["en"].formSection?.validatorText?.name
+                        }
+                      />
                     )}
                   </div>
                 )}
@@ -161,16 +177,20 @@ const AuthPage = () => {
                     }
                     name="email"
                     type="email"
-                    placeholder="Email Address"
+                    placeholder={
+                      AuthPageData["en"].formSection?.placeholderText?.email
+                    }
                     ref={emailRef}
                     onBlur={() =>
                       validateEmail(emailRef?.current?.value, setEmailError)
                     }
                   />
                   {emailError && (
-                    <div className="text-[13px] leading-[13px] pt-2 text-[#e87c03]">
-                      Please enter a valid email address or phone number.
-                    </div>
+                    <InputValidator
+                      text={
+                        AuthPageData["en"].formSection?.validatorText?.email
+                      }
+                    />
                   )}
                 </div>
                 <div className="flex-auto pb-4 max-w-full relative">
@@ -181,7 +201,9 @@ const AuthPage = () => {
                     }
                     name="password"
                     type="password"
-                    placeholder="Password"
+                    placeholder={
+                      AuthPageData["en"].formSection?.placeholderText?.password
+                    }
                     ref={passRef}
                     onBlur={() =>
                       validatePassword(passRef?.current?.value, setPassError)
@@ -193,17 +215,22 @@ const AuthPage = () => {
                     {show ? "SHOW" : "HIDE"}
                   </span>
                   {passError && (
-                    <div className="text-[13px] leading-[13px] pt-2 text-[#e87c03]">
-                      Your password must contain between 4 and 60 characters.
-                    </div>
+                    <InputValidator
+                      text={
+                        AuthPageData["en"].formSection?.validatorText?.password
+                      }
+                    />
                   )}
                 </div>
                 <button className="mx-0 mt-6 mb-3 w-full h-[50px] bg-ogRed hover:bg-ogRedHover hover:ease-ogTransHover ease-ogTrans duration-250ms transition-bgColor rounded font-medium text-center text-white cursor-pointer">
-                  {!loading && (authState == "login" ? "Sign In" : "Sign Up")}
+                  {!loading &&
+                    (authState == "login"
+                      ? AuthPageData["en"].formSection?.formTitle?.signin
+                      : AuthPageData["en"].formSection?.formTitle?.signup)}
                   {loading && <img className="h-8 w-8 mx-auto" src={Spinner} />}
                 </button>
                 <div className="flex justify-between text-[#b3b3b3] text-[13px]">
-                  <span className="flex items-center remember-me">
+                  <span className="flex items-center cursor-pointer">
                     <input
                       type="checkbox"
                       name="rememberMe"
@@ -211,10 +238,12 @@ const AuthPage = () => {
                       className="h-4 w-4"
                     />
                     <label htmlFor="rememberMe" className="pl-1">
-                      Remember Me
+                      {AuthPageData["en"].formSection?.rememberMeBtnText}
                     </label>
                   </span>
-                  <span>Need Help?</span>
+                  <span className="cursor-pointer">
+                    {AuthPageData["en"].formSection?.needhelpBtnText}
+                  </span>
                 </div>
               </form>
             </div>
@@ -222,27 +251,26 @@ const AuthPage = () => {
               <div className="text-[#b3b3b3] text-base mt-4">
                 {authState == "login" ? (
                   <div>
-                    New to Netflix?{" "}
+                    {AuthPageData["en"].formSection?.formSwitchText?.signin}
                     <span
                       onClick={() => setAuthState("signup")}
                       className="hover:underline text-white cursor-pointer">
-                      Sign up now
+                      {AuthPageData["en"].formSection?.formSwitchText?.signin2}
                     </span>
                   </div>
                 ) : (
                   <div>
-                    Already have account?{" "}
+                    {AuthPageData["en"].formSection?.formSwitchText?.signup}
                     <span
                       onClick={() => setAuthState("login")}
                       className="hover:underline text-white cursor-pointer">
-                      Sign in now
+                      {AuthPageData["en"].formSection?.formSwitchText?.signup2}
                     </span>
                   </div>
                 )}
               </div>
               <div className="mt-4 text-[13px] text-[#b3b3b3]">
-                This page is protected by Google reCAPTCHA to ensure you're not
-                a bot. Learn more.
+                {AuthPageData["en"].formSection?.capchaText}
               </div>
             </div>
           </div>

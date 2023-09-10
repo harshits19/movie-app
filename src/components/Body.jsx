@@ -8,7 +8,6 @@ import { onAuthStateChanged } from "firebase/auth";
 
 const Body = () => {
   const [userSignupEmail, setUserSignupEmail] = useState({});
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,6 +23,7 @@ const Body = () => {
         );
         navigate("/home");
       } else {
+        navigate("/");
         dispatch(removeUser());
       }
     });

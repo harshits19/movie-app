@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-img:not([src]) {
-  visibility: hidden;
+
+.hpCatStripes::-webkit-scrollbar {
+  display: none;
 }

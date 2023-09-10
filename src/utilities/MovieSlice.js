@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const MovieSlice = createSlice({
-  name: "movieDb",
-  initialState: { topRated: {}, popular: {}, nowPlaying: {} },
+  name: "moviesDb",
+  initialState: { topRated: null, popular: null, nowPlaying: null },
   reducers: {
     addTopRatedMovies: (state, action) => {
       state.topRated = action.payload;

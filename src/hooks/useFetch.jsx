@@ -1,27 +1,38 @@
-const useFetch = async (type, params = "") => {
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: import.meta.env.VITE_REACT_APP_API_KEY,
-    },
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addNowPlayingMovies,
+  addPopularMovies,
+  addTopRatedMovies,
+} from "../utilities/MovieSlice";
+import { ApiURL, fetch_options } from "../utilities/Constants";
+
+const useFetch = (type) => {
+  const dispatch = useDispatch();
+  const { nowPlaying, topRated, popular } = useSelector(
+    (store) => store.moviesDb
+  );
+
+  const fetchNowPlayingMovies = async () => {
+    const response = await fetch(`${ApiURL?.nowPlaying}`, fetch_options);
+    const data = await response.json();
+    dispatch(addNowPlayingMovies(data?.results));
   };
-  let URL = "";
-  if (type === "popular")
-    URL = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
-  else if (type === "topRated")
-    URL = "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
-  else if (type === "nowPlaying")
-    URL =
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
-  else if (type === "movie")
-    URL = `https://api.themoviedb.org/3/movie/${params}`;
-  else if (type === "movieImg")
-    URL = `https://api.themoviedb.org/3/movie/${params}/images`;
-  else if (type === "movieVideo")
-    URL = `https://api.themoviedb.org/3/movie/${params}/videos`;
-  const response = await fetch(`${URL}`, options);
-  const data = await response.json();
-  return data;
+  const fetchPopularMovies = async () => {
+    const response = await fetch(`${ApiURL?.popular}`, fetch_options);
+    const data = await response.json();
+    dispatch(addPopularMovies(data?.results));
+  };
+  const fetchTopRatedMovies = async () => {
+    const response = await fetch(`${ApiURL?.topRated}`, fetch_options);
+    const data = await response.json();
+    dispatch(addTopRatedMovies(data?.results));
+  };
+
+  useEffect(() => {
+    type === "nowPlaying" && !nowPlaying && fetchNowPlayingMovies();
+    type === "popular" && !popular && fetchPopularMovies();
+    type === "topRated" && !topRated && fetchTopRatedMovies();
+  }, []);
 };
 export default useFetch;

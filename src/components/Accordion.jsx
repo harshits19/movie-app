@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import { PlusIcon } from "../assets/SVGs";
-import { AccordionData } from "../utilities/Constants";
 
 const AccordionItem = ({ item, activeIndex, handleToggle }) => {
   const currItem = useRef();
@@ -39,7 +38,7 @@ const AccordionItem = ({ item, activeIndex, handleToggle }) => {
   );
 };
 
-const Accordion = () => {
+const Accordion = ({ data }) => {
   const [activeIndex, setActiveIndex] = useState(true);
   const handleToggle = (index) => {
     activeIndex === index ? setActiveIndex(null) : setActiveIndex(index);
@@ -48,7 +47,7 @@ const Accordion = () => {
   return (
     <div className="flex lg:flex-row flex-col justify-center mx-auto xl:max-w-[calc(83.3%-6rem)] sm:max-w-[calc(100%-4rem)] max-w-[calc(100%-3rem)] items-center pt-8">
       <div className="w-full text-white">
-        {AccordionData?.items.map((item) => {
+        {data?.map((item) => {
           return (
             <AccordionItem
               item={item}

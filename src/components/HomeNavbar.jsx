@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { auth } from "../utilities/Firebase";
 import { signOut } from "firebase/auth";
 import { OGlogo, SearchBtn } from "../assets/SVGs";
 
 const HomeNavbar = () => {
+  const navigate = useNavigate();
+  const navRef = useRef();
   const user = useSelector((store) => store?.user?.user);
   const [navBackground, setNavBackground] = useState("bg-transparent");
-  const navRef = useRef();
   navRef.current = navBackground;
-  const navigate = useNavigate();
 
   const handleSignOut = () => {
     signOut(auth)
@@ -23,12 +23,10 @@ const HomeNavbar = () => {
   };
   useEffect(() => {
     const handleScroll = () => {
-      const show = window.scrollY > 50;
-      if (show) {
-        setNavBackground("bg-[#141414]");
-      } else {
-        setNavBackground("bg-transparent");
-      }
+      const show = window.scrollY > 30;
+      show
+        ? setNavBackground("bg-[#141414]")
+        : setNavBackground("bg-transparent");
     };
     document.addEventListener("scroll", handleScroll);
     return () => {
@@ -38,12 +36,14 @@ const HomeNavbar = () => {
   return (
     <div>
       <div
-        className={`fixed top-0 left-0 min-h-[70px] w-full z-10 text-white ${navRef.current} transition-bgColor duration-[0.4s] bg-[linear-gradient(180deg,rgba(0,0,0,0.7)_10%,transparent)]`}
+        className={`fixed top-0 left-0 min-h-[70px] w-full z-20 text-white ${navRef.current} transition-bgColor duration-[0.4s] bg-[linear-gradient(180deg,rgba(0,0,0,0.7)_10%,transparent)]`}
         ref={navRef}>
         <div className="flex items-center justify-between md:px-10 px-4 h-[70px]">
           <div className="flex items-center">
             <div className="w-min mr-8">
-              <OGlogo classList={"sm:h-10 sm:w-[96px] h-8 w-20"} />
+              <Link to="/home">
+                <OGlogo classList={"sm:h-10 sm:w-[96px] h-8 w-20"} />
+              </Link>
             </div>
             <div className="sm:flex hidden lg:gap-x-4 gap-x-2">
               <span className="lg:text-sm text-xs font-medium cursor-pointer">
@@ -90,7 +90,6 @@ const HomeNavbar = () => {
           </div>
         </div>
       </div>
-      {/* <button onClick={() => handleSignOut()}>SignOut</button> */}
     </div>
   );
 };

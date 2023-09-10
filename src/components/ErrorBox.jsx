@@ -1,43 +1,33 @@
 import { Link } from "react-router-dom";
 
-const ErrorBox = ({ authError, setAuthState }) => {
+const ErrorBox = ({ authError, setAuthState, text }) => {
   const UserNotFound = () => {
     return (
       <div>
-        Sorry, we can't find an account with this email address. Please try
-        again or{" "}
+        {text?.userNF}
         <span
           className="underline cursor-pointer"
           onClick={() => setAuthState("signup")}>
-          create a new account
+          {text?.userNF2}
         </span>
       </div>
     );
   };
   const IncorrectPassword = () => {
     return (
-      <div className="">
-        Incorrect password. Please try again or you can{" "}
+      <div>
+        {text?.incorrPass}
         <span className="underline cursor-pointer">
-          <Link to="/getHelp">reset your password</Link>
+          <Link to="/getHelp"> {text?.incorrPass2}</Link>
         </span>
       </div>
     );
   };
   const EmailUsed = () => {
-    return (
-      <div className="">
-        The provided email is already in use by an existing user
-      </div>
-    );
+    return <div>{text?.emailUsed}</div>;
   };
   const WeakPass = () => {
-    return (
-      <div className="">
-        The entered password is weak, Please use atleast 6 characters in
-        password.
-      </div>
-    );
+    return <div>{text?.weakPass}</div>;
   };
 
   return (
