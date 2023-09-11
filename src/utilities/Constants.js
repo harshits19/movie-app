@@ -257,7 +257,7 @@ export const AuthPageData = {
         signin: "New to Netflix? ",
         signin2: "Sign up now",
         signup: "Already have account? ",
-        signup2: "Sign up now",
+        signup2: "Sign in now",
       },
       capchaText:
         "This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.",
@@ -329,11 +329,12 @@ export const ProfileDpData = {
   ],
 };
 export const ApiURL = {
-  popular: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+  popular:
+    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&region=IN",
   topRated:
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&region=IN",
   nowPlaying:
-    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&region=IN",
   /* movie: `https://api.themoviedb.org/3/movie/${params}`,
   movieImg: `https://api.themoviedb.org/3/movie/${params}/images`,
   movieVideo: `https://api.themoviedb.org/3/movie/${params}/videos`, */

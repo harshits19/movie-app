@@ -14,19 +14,22 @@ const useFetch = (type) => {
   );
 
   const fetchNowPlayingMovies = async () => {
-    const response = await fetch(`${ApiURL?.nowPlaying}`, fetch_options);
-    const data = await response.json();
-    dispatch(addNowPlayingMovies(data?.results));
+    fetch(`${ApiURL?.nowPlaying}`, fetch_options)
+      .then((res) => res.json())
+      .then((res) => dispatch(addNowPlayingMovies(res?.results)))
+      .catch((err) => console.log(err));
   };
   const fetchPopularMovies = async () => {
-    const response = await fetch(`${ApiURL?.popular}`, fetch_options);
-    const data = await response.json();
-    dispatch(addPopularMovies(data?.results));
+    fetch(`${ApiURL?.popular}`, fetch_options)
+      .then((res) => res.json())
+      .then((res) => dispatch(addPopularMovies(res?.results)))
+      .catch((err) => console.log(err));
   };
   const fetchTopRatedMovies = async () => {
-    const response = await fetch(`${ApiURL?.topRated}`, fetch_options);
-    const data = await response.json();
-    dispatch(addTopRatedMovies(data?.results));
+    fetch(`${ApiURL?.topRated}`, fetch_options)
+      .then((res) => res.json())
+      .then((res) => dispatch(addTopRatedMovies(res?.results)))
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {

@@ -5,6 +5,7 @@ import Body from "./components/Body";
 import AuthPage from "./pages/AuthPage";
 import LandingPage from "./pages/LandingPage";
 const HomePage = lazy(() => import("./pages/HomePage"));
+import MoviePage from "./pages/MoviePage";
 import ErrorPage from "./pages/ErrorPage";
 import store from "./utilities/Store";
 
@@ -35,6 +36,12 @@ const appRouter = createBrowserRouter([
             <HomePage />
           </Suspense>
         ),
+        children: [
+          {
+            path: "/home/:movieId",
+            element: <MoviePage />,
+          },
+        ],
       },
       { path: "/login", element: <AuthPage /> },
     ],

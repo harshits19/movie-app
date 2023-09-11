@@ -36,11 +36,11 @@ const HomeNavbar = () => {
   return (
     <div>
       <div
-        className={`fixed top-0 left-0 min-h-[70px] w-full z-20 text-white ${navRef.current} transition-bgColor duration-[0.4s] bg-[linear-gradient(180deg,rgba(0,0,0,0.7)_10%,transparent)]`}
+        className={`fixed top-0 left-0 md:min-h-[70px] min-h-[50px] w-full z-20 text-white ${navRef.current} transition-bgColor duration-[0.4s] bg-[linear-gradient(180deg,rgba(0,0,0,0.7)_10%,transparent)]`}
         ref={navRef}>
-        <div className="flex items-center justify-between md:px-10 px-4 h-[70px]">
+        <div className="flex items-center justify-between md:px-10 px-4 md:h-[70px] h-[50px]">
           <div className="flex items-center">
-            <div className="w-min mr-8">
+            <div className="w-min md:mr-8 mr-4">
               <Link to="/home">
                 <OGlogo classList={"sm:h-10 sm:w-[96px] h-8 w-20"} />
               </Link>
@@ -61,7 +61,7 @@ const HomeNavbar = () => {
               <span className="lg:text-sm text-xs font-medium cursor-pointer">
                 My List
               </span>
-              <span className="lg:text-sm text-xs font-medium cursor-pointer">
+              <span className="lg:text-sm lg:inline hidden text-xs font-medium cursor-pointer">
                 Browse by Languages
               </span>
             </div>
