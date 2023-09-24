@@ -1,13 +1,13 @@
 import HomeNavbar from "../components/HomeNavbar";
 import HomeVideoSection from "../components/HomeVideoSection";
 import HomeCategorySection from "../components/HomeCategorySection";
-import useFetch from "../hooks/useFetch";
 import { Outlet } from "react-router-dom";
+import { fetchData } from "../utilities/DataSlice";
+import { useDispatch } from "react-redux";
 
 const HomePage = () => {
-  useFetch("popular");
-  useFetch("topRated");
-  useFetch("nowPlaying");
+  const dispatch = useDispatch();
+  dispatch(fetchData());
   return (
     <div className="bg-[#141414]">
       <HomeNavbar />

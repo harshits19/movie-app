@@ -51,13 +51,9 @@ const AuthPage = () => {
   };
 
   const handleAuth = () => {
-    setLoading(true);
-    if (
-      authState == "signup" &&
-      nameRef &&
-      emailRef.current.value &&
-      passRef.current.value
-    )
+    const isValid = emailRef.current.value && passRef.current.value;
+    isValid && setLoading(true);
+    if (authState == "signup" && nameRef && isValid)
       createUserWithEmailAndPassword(
         auth,
         emailRef?.current?.value,
@@ -86,11 +82,7 @@ const AuthPage = () => {
           setAuthError(err.code);
           setLoading(false);
         });
-    else if (
-      authState == "login" &&
-      emailRef.current.value &&
-      passRef.current.value
-    )
+    else if (authState == "login" && isValid)
       signInWithEmailAndPassword(
         auth,
         emailRef?.current?.value,
@@ -141,7 +133,8 @@ const AuthPage = () => {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  handleAuth();
+                  const isValidFormValues = !emailError && !passError;
+                  isValidFormValues && handleAuth();
                 }}>
                 {authState == "signup" && (
                   <div className="flex-auto pb-4 max-w-full ">
@@ -253,7 +246,10 @@ const AuthPage = () => {
                   <div>
                     {AuthPageData["en"].formSection?.formSwitchText?.signin}
                     <span
-                      onClick={() => setAuthState("signup")}
+                      onClick={() => {
+                        setAuthState("signup");
+                        setAuthError("");
+                      }}
                       className="hover:underline text-white cursor-pointer">
                       {AuthPageData["en"].formSection?.formSwitchText?.signin2}
                     </span>
@@ -262,7 +258,10 @@ const AuthPage = () => {
                   <div>
                     {AuthPageData["en"].formSection?.formSwitchText?.signup}
                     <span
-                      onClick={() => setAuthState("login")}
+                      onClick={() => {
+                        setAuthState("login");
+                        setAuthError("");
+                      }}
                       className="hover:underline text-white cursor-pointer">
                       {AuthPageData["en"].formSection?.formSwitchText?.signup2}
                     </span>

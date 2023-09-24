@@ -1,15 +1,20 @@
 import { useSelector } from "react-redux";
+import { selectHomeData } from "../utilities/DataSlice";
 import CategoryStripes from "./CategoryStripes";
 const HomeCategorySection = () => {
-  const { nowPlaying, topRated, popular } = useSelector(
-    (store) => store.moviesDb
-  );
-  if (!nowPlaying || !topRated || !popular) return;
+  const { trendingMovies, trendingTV, nfOriginals, netflixTV } =
+    useSelector(selectHomeData);
+  if (!trendingMovies || !trendingTV || !nfOriginals || !netflixTV) return;
   return (
-    <div className="lg:pl-16 md:pl-8 pl-4 pb-16 sm:-mt-16 2xl:-mt-28 mt-0 z-10 relative">
-      <CategoryStripes data={popular} title="Popular Movies" />
-      <CategoryStripes data={topRated} title="Top Rated Movies" />
-      <CategoryStripes data={nowPlaying} title="Now Playing" />
+    <div className="categoryStripes relative -mt-7 overflow-x-hidden pb-16 sm:-mt-16 2xl:-mt-28">
+      <CategoryStripes data={nfOriginals} title="Netflix Originals" type="tv" />
+      <CategoryStripes data={trendingTV} title="Popular TV Shows" type="tv" />
+      <CategoryStripes
+        data={trendingMovies}
+        title="Popular Movies"
+        type="movie"
+      />
+      <CategoryStripes data={netflixTV} title="Popular TV Shows" type="tv" />
     </div>
   );
 };

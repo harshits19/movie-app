@@ -1,30 +1,19 @@
-import { Link } from "react-router-dom";
-const CategoryStripes = ({ data, title = "Movies" }) => {
+import ItemCard from "./ItemCard";
+
+const CategoryStripes = ({ data, title = "Movies", type }) => {
   if (!data) return;
+
   return (
-    <div>
-      <h2 className="text-xl py-4 text-[#e5e5e5] hover:text-white font-bold cursor-pointer pl-2">
+    <div className="flex flex-col">
+      <h2 className="cursor-pointer py-4 pl-12 text-xl font-bold text-[#e5e5e5] hover:text-white">
         {title}
       </h2>
-      <div className="flex overflow-x-scroll overflow-y-hidden w-full hpCatStripes">
+      <div className="cardContainer -ml-12 -mt-12 flex gap-x-4 overflow-x-scroll px-24 pb-48 pt-12">
         {data &&
           data?.map((item) => {
-            console.log(item);
             return (
               item?.backdrop_path && (
-                <Link key={item?.id} to={"" + item?.id}>
-                  <div>
-                    <div className="cursor-pointer h-28 w-52 mx-2 hover:scale-105 ease-in-out duration-200">
-                      <img
-                        className="h-full w-full rounded-sm cursor-pointer  "
-                        src={
-                          "https://image.tmdb.org/t/p/w400" +
-                          item?.backdrop_path
-                        }
-                      />
-                    </div>
-                  </div>
-                </Link>
+                <ItemCard item={item} type={type} key={item?.id} />
               )
             );
           })}

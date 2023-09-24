@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.hpCatStripes::-webkit-scrollbar {
+
+.cardContainer::-webkit-scrollbar {
   display: none;
+}
+.categoryStripes > div:not(:first-child) {
+  margin-top: -12rem;
 }
