@@ -2,9 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #141414;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 .cardContainer::-webkit-scrollbar {
   display: none;
 }
 .categoryStripes > div:not(:first-child) {
   margin-top: -12rem;
+}
+.shine {
+  background: #3a3a3a;
+  background-image: linear-gradient(
+    to right,
+    #3a3a3a 0%,
+    #3f3f3f 20%,
+    #3a3a3a 40%,
+    #3a3a3a 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 400px;
+  display: inline-block;
+  position: relative;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: placeholderShimmer;
+  -webkit-animation-timing-function: linear;
+}
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
 }

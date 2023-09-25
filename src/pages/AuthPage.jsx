@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utilities/UserSlice";
+import { addUser } from "../store/UserSlice";
 import { UserEmailContext } from "../utilities/UserContext";
 import {
   createUserWithEmailAndPassword,
@@ -21,7 +21,7 @@ import Spinner from "../assets/spinner.svg";
 
 const InputValidator = ({ text }) => {
   return (
-    <div className="text-[13px] leading-[13px] pt-2 text-[#e87c03]">{text}</div>
+    <div className="pt-2 text-[13px] leading-[13px] text-[#e87c03]">{text}</div>
   );
 };
 
@@ -57,7 +57,7 @@ const AuthPage = () => {
       createUserWithEmailAndPassword(
         auth,
         emailRef?.current?.value,
-        passRef?.current?.value
+        passRef?.current?.value,
       )
         .then((user) => {
           setUserSignupEmail({});
@@ -69,7 +69,11 @@ const AuthPage = () => {
             .then(() => {
               const { email, displayName, photoURL } = auth.currentUser;
               dispatch(
-                addUser({ email: email, name: displayName, photoURL: photoURL })
+                addUser({
+                  email: email,
+                  name: displayName,
+                  photoURL: photoURL,
+                }),
               );
             })
             .catch((error) => {
@@ -86,7 +90,7 @@ const AuthPage = () => {
       signInWithEmailAndPassword(
         auth,
         emailRef?.current?.value,
-        passRef?.current?.value
+        passRef?.current?.value,
       )
         .then(() => {
           setUserSignupEmail({});
@@ -100,25 +104,25 @@ const AuthPage = () => {
 
   return (
     <div className="bg-black">
-      <div className="lg:min-h-[43.75rem] sm:min-h-[32rem] min-h-[30rem] lg:pb-[4rem] sm:pb-[3rem] pb-8 flex h-full relative justify-center">
-        <div className="absolute inset-0 md:block hidden">
+      <div className="relative flex h-full min-h-[30rem] justify-center pb-8 sm:min-h-[32rem] sm:pb-[3rem] lg:min-h-[43.75rem] lg:pb-[4rem]">
+        <div className="absolute inset-0 hidden md:block">
           <div className="relative h-full w-full overflow-hidden ">
             <img
               src={AuthPageData?.bgImages?.urlOne}
-              className="object-cover opacity-50 w-full h-full scale-125 -translate-y-[10%]"
+              className="h-full w-full -translate-y-[10%] scale-125 object-cover opacity-50"
             />
             <div className="absolute inset-0" />
           </div>
         </div>
-        <div className="absolute left-0 right-0 mx-4 md:mx-10 pt-6 md:pt-4 md:bg-transparent bg-black">
+        <div className="absolute left-0 right-0 mx-4 bg-black pt-6 md:mx-10 md:bg-transparent md:pt-4">
           <Link to="/">
             <OGlogo classList="md:h-[45px] md:w-[167px] h-8 w-18 relative" />
           </Link>
         </div>
-        <div className="min-h-screen w-full md:max-w-[450px] md:mx-auto md:px-0 px-[5%] md:bg-transparent relative before:content-[''] md:before:h-[96px] before:h-[56px] before:block">
-          <div className="md:min-h-[630px] min-h-[540px] md:px-[68px] md:pt-[60px] md:pb-10 px-0 pt-5 pb-[30px] m-0 bg-[#000000bf] rounded flex flex-col w-full box-border ">
+        <div className="relative min-h-screen w-full px-[5%] before:block before:h-[56px] before:content-[''] md:mx-auto md:max-w-[450px] md:bg-transparent md:px-0 md:before:h-[96px]">
+          <div className="m-0 box-border flex min-h-[540px] w-full flex-col rounded bg-[#000000bf] px-0 pb-[30px] pt-5 md:min-h-[630px] md:px-[68px] md:pb-10 md:pt-[60px] ">
             <div className="grow">
-              <div className="text-[32px] font-medium mb-7 text-white">
+              <div className="mb-7 text-[32px] font-medium text-white">
                 {authState == "login"
                   ? AuthPageData["en"].formSection?.formTitle?.signin
                   : AuthPageData["en"].formSection?.formTitle?.signup}
@@ -135,13 +139,14 @@ const AuthPage = () => {
                   e.preventDefault();
                   const isValidFormValues = !emailError && !passError;
                   isValidFormValues && handleAuth();
-                }}>
+                }}
+              >
                 {authState == "signup" && (
-                  <div className="flex-auto pb-4 max-w-full ">
+                  <div className="max-w-full flex-auto pb-4 ">
                     <input
                       className={
                         (nameError ? "border-b-2 border-[#e87c03] " : "") +
-                        " bg-[#333333] w-full h-[50px] leading-[50px] px-4 border-0 text-base font-normal text-white outline-none rounded"
+                        " h-[50px] w-full rounded border-0 bg-[#333333] px-4 text-base font-normal leading-[50px] text-white outline-none"
                       }
                       name="name"
                       type="text"
@@ -162,11 +167,11 @@ const AuthPage = () => {
                     )}
                   </div>
                 )}
-                <div className="flex-auto pb-4 max-w-full ">
+                <div className="max-w-full flex-auto pb-4 ">
                   <input
                     className={
                       (emailError ? "border-b-2 border-[#e87c03] " : "") +
-                      " bg-[#333333] w-full h-[50px] leading-[50px] px-4 border-0 text-base font-normal text-white outline-none rounded"
+                      " h-[50px] w-full rounded border-0 bg-[#333333] px-4 text-base font-normal leading-[50px] text-white outline-none"
                     }
                     name="email"
                     type="email"
@@ -186,11 +191,11 @@ const AuthPage = () => {
                     />
                   )}
                 </div>
-                <div className="flex-auto pb-4 max-w-full relative">
+                <div className="relative max-w-full flex-auto pb-4">
                   <input
                     className={
                       (passError ? "border-b-2 border-[#e87c03] " : "") +
-                      " bg-[#333333] w-full h-[50px] leading-[50px] pr-14 pl-4 border-0 text-base font-normal text-white outline-none rounded"
+                      " h-[50px] w-full rounded border-0 bg-[#333333] pl-4 pr-14 text-base font-normal leading-[50px] text-white outline-none"
                     }
                     name="password"
                     type="password"
@@ -203,8 +208,9 @@ const AuthPage = () => {
                     }
                   />
                   <span
-                    className="absolute right-0 top-[14px] px-2 text-sm text-[#8c8c8c] cursor-pointer"
-                    onClick={toggleVisibility}>
+                    className="absolute right-0 top-[14px] cursor-pointer px-2 text-sm text-[#8c8c8c]"
+                    onClick={toggleVisibility}
+                  >
                     {show ? "SHOW" : "HIDE"}
                   </span>
                   {passError && (
@@ -215,15 +221,15 @@ const AuthPage = () => {
                     />
                   )}
                 </div>
-                <button className="mx-0 mt-6 mb-3 w-full h-[50px] bg-ogRed hover:bg-ogRedHover hover:ease-ogTransHover ease-ogTrans duration-250ms transition-bgColor rounded font-medium text-center text-white cursor-pointer">
+                <button className="mx-0 mb-3 mt-6 h-[50px] w-full cursor-pointer rounded bg-ogRed text-center font-medium text-white transition-bgColor duration-250ms ease-ogTrans hover:bg-ogRedHover hover:ease-ogTransHover">
                   {!loading &&
                     (authState == "login"
                       ? AuthPageData["en"].formSection?.formTitle?.signin
                       : AuthPageData["en"].formSection?.formTitle?.signup)}
-                  {loading && <img className="h-8 w-8 mx-auto" src={Spinner} />}
+                  {loading && <img className="mx-auto h-8 w-8" src={Spinner} />}
                 </button>
-                <div className="flex justify-between text-[#b3b3b3] text-[13px]">
-                  <span className="flex items-center cursor-pointer">
+                <div className="flex justify-between text-[13px] text-[#b3b3b3]">
+                  <span className="flex cursor-pointer items-center">
                     <input
                       type="checkbox"
                       name="rememberMe"
@@ -241,7 +247,7 @@ const AuthPage = () => {
               </form>
             </div>
             <div className="grow">
-              <div className="text-[#b3b3b3] text-base mt-4">
+              <div className="mt-4 text-base text-[#b3b3b3]">
                 {authState == "login" ? (
                   <div>
                     {AuthPageData["en"].formSection?.formSwitchText?.signin}
@@ -250,7 +256,8 @@ const AuthPage = () => {
                         setAuthState("signup");
                         setAuthError("");
                       }}
-                      className="hover:underline text-white cursor-pointer">
+                      className="cursor-pointer text-white hover:underline"
+                    >
                       {AuthPageData["en"].formSection?.formSwitchText?.signin2}
                     </span>
                   </div>
@@ -262,7 +269,8 @@ const AuthPage = () => {
                         setAuthState("login");
                         setAuthError("");
                       }}
-                      className="hover:underline text-white cursor-pointer">
+                      className="cursor-pointer text-white hover:underline"
+                    >
                       {AuthPageData["en"].formSection?.formSwitchText?.signup2}
                     </span>
                   </div>

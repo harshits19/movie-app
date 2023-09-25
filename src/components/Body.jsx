@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { UserEmailContext } from "../utilities/UserContext";
 import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../utilities/UserSlice";
+import { addUser } from "../store/UserSlice";
 import { auth } from "../utilities/Firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -19,24 +19,20 @@ const Body = () => {
             email: user.email,
             name: user.displayName,
             photoURL: user.photoURL,
-          })
+          }),
         );
         navigate("/home");
       } else {
         navigate("/");
-        dispatch(removeUser());
       }
     });
     return () => eventHandle();
   }, []);
 
   return (
-    <>
-      <UserEmailContext.Provider
-        value={{ userSignupEmail, setUserSignupEmail }}>
-        <Outlet />
-      </UserEmailContext.Provider>
-    </>
+    <UserEmailContext.Provider value={{ userSignupEmail, setUserSignupEmail }}>
+      <Outlet />
+    </UserEmailContext.Provider>
   );
 };
 

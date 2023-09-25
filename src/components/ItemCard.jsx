@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import useGenres from "../hooks/useGenres";
 import {
   IoAddSharp as AddBtn,
   IoCaretForwardCircle as PlayBtn,
@@ -7,29 +9,8 @@ import {
   BsHandThumbsUp as LikeBtn,
   BsHandThumbsDown as DislikeBtn,
 } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { Genres } from "../utilities/Constants";
 
 const ItemCard = ({ item, type }) => {
-  const renderGenres = () => {
-    if (type !== "movie" && type !== "tv") {
-      return [];
-    }
-    const genreIds = item?.genre_ids;
-    const genreArray = Genres[type];
-    const selectedGenres = genreArray
-      .filter((genre) => genreIds.includes(genre.id))
-      .map((genre) => genre.name);
-    return selectedGenres.map((item, index) => {
-      const isLast = index === genreIds.length - 1;
-      return (
-        <span key={index}>
-          <span>{" " + item}</span>
-          {!isLast && <span>,</span>}
-        </span>
-      );
-    });
-  };
   return (
     <div className="group z-10 flex h-32 w-56 shrink-0 cursor-pointer flex-col rounded-md bg-[#252525] text-white transition-all duration-300 ease-[ease] hover:z-[15] hover:scale-125 hover:shadow-[0_0_1rem_#00000099,0_6px_6px_#00000080] sm:hover:scale-150">
       <Link to={"" + item?.id} state={{ item, type }} className="contents">
@@ -73,7 +54,7 @@ const ItemCard = ({ item, type }) => {
             ? Math.round(item?.vote_average * 10) + "% Match"
             : "80% Match"}
         </div>
-        <div className="text-[0.65rem]">{renderGenres()}</div>
+        <div className="text-[0.65rem]">{useGenres(type, item?.genre_ids)}</div>
       </div>
     </div>
   );

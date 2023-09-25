@@ -5,9 +5,11 @@ import Body from "./components/Body";
 import AuthPage from "./pages/AuthPage";
 import LandingPage from "./pages/LandingPage";
 const HomePage = lazy(() => import("./pages/HomePage"));
-import MoviePage from "./pages/MoviePage";
+const TvPage = lazy(() => import("./pages/TvPage"));
+const MoviePage = lazy(() => import("./pages/MoviePage"));
+import ContentPage from "./pages/ContentPage";
 import ErrorPage from "./pages/ErrorPage";
-import store from "./utilities/Store";
+import store from "./store/Store";
 
 const App = () => {
   return (
@@ -38,12 +40,29 @@ const appRouter = createBrowserRouter([
         ),
         children: [
           {
-            path: "/home/:movieId",
-            element: <MoviePage />,
+            path: "/home/:contentId",
+            element: <ContentPage />,
           },
         ],
       },
       { path: "/login", element: <AuthPage /> },
+      {
+        path: "/home/tv",
+        element: (
+          <Suspense>
+            <TvPage />
+          </Suspense>
+        ),
+        children: [{ path: "/home/tv/:tvId", element: <ContentPage /> }],
+      },
+      {
+        path: "/home/movie",
+        element: (
+          <Suspense>
+            <MoviePage />
+          </Suspense>
+        ),
+      },
     ],
   },
 ]);

@@ -17,6 +17,7 @@ const HomeNavbar = () => {
     signOut(auth)
       .then(() => {
         navigate("/");
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -50,15 +51,21 @@ const HomeNavbar = () => {
               </Link>
             </div>
             <div className="hidden gap-x-2 sm:flex lg:gap-x-4">
-              <span className="cursor-pointer text-xs font-medium lg:text-sm">
-                Home
-              </span>
-              <span className="cursor-pointer text-xs font-medium lg:text-sm">
-                TV Shows
-              </span>
-              <span className="cursor-pointer text-xs font-medium lg:text-sm">
-                Movies
-              </span>
+              <Link to="/home" className="contents">
+                <span className="cursor-pointer text-xs font-medium lg:text-sm">
+                  Home
+                </span>
+              </Link>
+              <Link to="/home/tv" className="contents">
+                <span className="cursor-pointer text-xs font-medium lg:text-sm">
+                  TV Shows
+                </span>
+              </Link>
+              <Link to="/home/movie" className="contents">
+                <span className="cursor-pointer text-xs font-medium lg:text-sm">
+                  Movies
+                </span>
+              </Link>
               <span className="cursor-pointer text-xs font-medium lg:text-sm">
                 New & Popular
               </span>
@@ -72,10 +79,10 @@ const HomeNavbar = () => {
           </div>
           <div className="flex items-center gap-x-4">
             <form
-              className={`flex h-8 text-white ${
+              className={`flex h-9 text-white ${
                 searchState
-                  ? "w-40 border-2 border-white bg-[rgba(0,0,0,0.6)] px-2"
-                  : "w-5 bg-transparent"
+                  ? "w-36 border-2 border-white bg-[rgba(0,0,0,0.6)] px-2 md:w-40 lg:w-64"
+                  : "w-8 bg-transparent"
               } ease transition-all duration-300`}
               onSubmit={(e) => {
                 e.preventDefault();
@@ -83,15 +90,16 @@ const HomeNavbar = () => {
               }}
             >
               <SearchBtn
-                className="h-full w-6 cursor-pointer "
+                className="h-full w-7 cursor-pointer "
                 onClick={() => setSearchState(!searchState)}
               />
               <input
-                className={`h-full focus:outline-none  ${
+                className={`h-full py-1 focus:outline-none ${
                   searchState
                     ? " visible ml-2 w-full bg-[rgba(0,0,0,0.1)]"
                     : " invisible w-0"
-                }`}
+                } `}
+                placeholder="Titles, genres"
                 onBlur={() => setSearchState(false)}
                 onMouseOver={handleClick}
                 ref={inputRef}
@@ -102,14 +110,14 @@ const HomeNavbar = () => {
               <span className="ml-2.5 h-0 w-0 border-x-[5px] border-b-0 border-t-[5px] border-solid border-x-transparent border-b-transparent border-t-white transition-transform duration-[367ms] ease-[cubic-bezier(.21,0,0.07,1)] group-hover:rotate-180"></span>
               <div className="invisible absolute right-0 top-[35px] z-10 w-[180px] bg-[#000000e6] transition-[visibility] group-hover:visible">
                 <div className="flex h-full w-full flex-col py-2 text-xs md:text-sm">
-                  <div className="cursor-pointer px-4 py-2 hover:underline">
-                    Manage Profile
+                  <div className="cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap px-4 py-2 hover:underline">
+                    {user?.name}
                   </div>
                   <div className="cursor-pointer px-4 py-2 hover:underline">
                     Account
                   </div>
                   <div
-                    className="cursor-pointer border-t border-[#ffffff40] px-4 py-2 hover:underline"
+                    className="cursor-pointer border-t border-[#ffffff40] px-4 py-2 text-center hover:underline"
                     onClick={() => handleSignOut()}
                   >
                     Sign Out
