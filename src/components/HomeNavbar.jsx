@@ -1,17 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import NavSearch from "./NavSearch";
 import { auth } from "../utilities/Firebase";
 import { signOut } from "firebase/auth";
-import { AiOutlineSearch as SearchBtn } from "react-icons/ai";
 import { OGlogo } from "../assets/SVGs";
 
 const HomeNavbar = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store?.user?.user);
   const [navBackground, setNavBackground] = useState("bg-transparent");
-  const [searchState, setSearchState] = useState(false);
-  const inputRef = useRef();
 
   const handleSignOut = () => {
     signOut(auth)
@@ -23,6 +21,7 @@ const HomeNavbar = () => {
         console.log(err);
       });
   };
+
   useEffect(() => {
     const handleScroll = () => {
       const show = window.scrollY > 30;
@@ -35,9 +34,7 @@ const HomeNavbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const handleClick = () => {
-    inputRef.current.focus();
-  };
+
   return (
     <div>
       <div
@@ -50,7 +47,7 @@ const HomeNavbar = () => {
                 <OGlogo classList={"sm:h-10 sm:w-[96px] h-8 w-20"} />
               </Link>
             </div>
-            <div className="hidden gap-x-2 sm:flex lg:gap-x-4">
+            <div className="hidden gap-x-2 md:flex lg:gap-x-4">
               <Link to="/home" className="contents">
                 <span className="cursor-pointer text-xs font-medium lg:text-sm">
                   Home
@@ -76,40 +73,35 @@ const HomeNavbar = () => {
                 Browse by Languages
               </span>
             </div>
+            <div className="group relative flex md:hidden">
+              <div className="flex items-center">
+                <span>Browse</span>
+                <span className="ml-2.5 h-0 w-0 border-x-[5px] border-b-0 border-t-[5px] border-solid border-x-transparent border-b-transparent border-t-white transition-transform duration-[367ms] ease-[cubic-bezier(.21,0,0.07,1)] group-hover:rotate-180"></span>
+              </div>
+              <div className="invisible absolute left-0 top-7 flex w-32 flex-col rounded  bg-[#000000e6] group-hover:visible">
+                <Link to="/home/tv" className="contents">
+                  <span className="cursor-pointer px-4 py-2 text-sm font-medium">
+                    TV Shows
+                  </span>
+                </Link>
+                <Link to="/home/movie" className="contents">
+                  <span className="cursor-pointer border-t border-[#ffffff40] px-4 py-2 text-sm font-medium">
+                    Movies
+                  </span>
+                </Link>
+                <span className="cursor-pointer border-t border-[#ffffff40] px-4 py-2 text-sm font-medium">
+                  My List
+                </span>
+              </div>
+            </div>
           </div>
           <div className="flex items-center gap-x-4">
-            <form
-              className={`flex h-9 text-white ${
-                searchState
-                  ? "w-36 border-2 border-white bg-[rgba(0,0,0,0.6)] px-2 md:w-40 lg:w-64"
-                  : "w-8 bg-transparent"
-              } ease transition-all duration-300`}
-              onSubmit={(e) => {
-                e.preventDefault();
-                navigate(`/search?q=${inputRef.current.value}`);
-              }}
-            >
-              <SearchBtn
-                className="h-full w-7 cursor-pointer "
-                onClick={() => setSearchState(!searchState)}
-              />
-              <input
-                className={`h-full py-1 focus:outline-none ${
-                  searchState
-                    ? " visible ml-2 w-full bg-[rgba(0,0,0,0.1)]"
-                    : " invisible w-0"
-                } `}
-                placeholder="Titles, genres"
-                onBlur={() => setSearchState(false)}
-                onMouseOver={handleClick}
-                ref={inputRef}
-              />
-            </form>
+            <NavSearch />
             <div className="group relative flex cursor-pointer items-center text-white">
               {user && <img className="h-8 w-8 rounded" src={user?.photoURL} />}
               <span className="ml-2.5 h-0 w-0 border-x-[5px] border-b-0 border-t-[5px] border-solid border-x-transparent border-b-transparent border-t-white transition-transform duration-[367ms] ease-[cubic-bezier(.21,0,0.07,1)] group-hover:rotate-180"></span>
               <div className="invisible absolute right-0 top-[35px] z-10 w-[180px] bg-[#000000e6] transition-[visibility] group-hover:visible">
-                <div className="flex h-full w-full flex-col py-2 text-xs md:text-sm">
+                <div className="flex h-full w-full flex-col py-2 text-sm font-medium">
                   <div className="cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap px-4 py-2 hover:underline">
                     {user?.name}
                   </div>

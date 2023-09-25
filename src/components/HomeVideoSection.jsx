@@ -26,7 +26,7 @@ const HomeVideoSection = () => {
         </div>
       </div>
       <div className="absolute left-0 top-0 h-full w-full pt-28 text-white md:pt-40 lg:pt-60 xl:pt-80 ">
-        <div className="w-full px-4 sm:w-1/2 md:pl-8 lg:pl-16 xl:w-1/3">
+        <div className="w-full pl-8 pr-4 sm:w-1/2 md:pl-8 md:pr-0 lg:pl-16 xl:w-1/3">
           <div className="text-xl font-bold md:text-3xl lg:text-5xl">
             {mainMovie?.title || mainMovie?.name || mainMovie?.original_name}
           </div>

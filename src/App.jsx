@@ -10,6 +10,8 @@ const MoviePage = lazy(() => import("./pages/MoviePage"));
 import ContentPage from "./pages/ContentPage";
 import ErrorPage from "./pages/ErrorPage";
 import store from "./store/Store";
+import SearchPage from "./pages/SearchPage";
+import HomeBody from "./components/HomeBody";
 
 const App = () => {
   return (
@@ -31,37 +33,53 @@ const appRouter = createBrowserRouter([
         path: "/",
         element: <LandingPage />,
       },
-      {
-        path: "/home",
-        element: (
-          <Suspense>
-            <HomePage />
-          </Suspense>
-        ),
-        children: [
-          {
-            path: "/home/:contentId",
-            element: <ContentPage />,
-          },
-        ],
-      },
       { path: "/login", element: <AuthPage /> },
       {
-        path: "/home/tv",
-        element: (
-          <Suspense>
-            <TvPage />
-          </Suspense>
-        ),
-        children: [{ path: "/home/tv/:tvId", element: <ContentPage /> }],
-      },
-      {
-        path: "/home/movie",
-        element: (
-          <Suspense>
-            <MoviePage />
-          </Suspense>
-        ),
+        path: "/home",
+        element: <HomeBody />,
+        children: [
+          {
+            path: "/home",
+            element: (
+              <Suspense>
+                <HomePage />
+              </Suspense>
+            ),
+            children: [
+              {
+                path: "/home/:contentId",
+                element: <ContentPage />,
+              },
+            ],
+          },
+          {
+            path: "/home/tv",
+            element: (
+              <Suspense>
+                <TvPage />
+              </Suspense>
+            ),
+            children: [{ path: "/home/tv/:tvId", element: <ContentPage /> }],
+          },
+          {
+            path: "/home/movie",
+            element: (
+              <Suspense>
+                <MoviePage />
+              </Suspense>
+            ),
+            children: [
+              { path: "/home/movie/:movieId", element: <ContentPage /> },
+            ],
+          },
+          {
+            path: "/home/search",
+            element: <SearchPage />,
+            children: [
+              { path: "/home/search/:contentId", element: <ContentPage /> },
+            ],
+          },
+        ],
       },
     ],
   },

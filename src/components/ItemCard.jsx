@@ -12,7 +12,7 @@ import {
 
 const ItemCard = ({ item, type }) => {
   return (
-    <div className="group z-10 flex h-32 w-56 shrink-0 cursor-pointer flex-col rounded-md bg-[#252525] text-white transition-all duration-300 ease-[ease] hover:z-[15] hover:scale-125 hover:shadow-[0_0_1rem_#00000099,0_6px_6px_#00000080] sm:hover:scale-150">
+    <div className="group z-10 flex h-32 w-56 shrink-0 cursor-pointer flex-col rounded-md bg-[#252525] text-white transition-all duration-300 ease-[ease] hover:z-[15] hover:scale-125 hover:shadow-[0_0_1rem_#00000099,0_6px_6px_#00000080] lg:hover:scale-150">
       <Link to={"" + item?.id} state={{ item, type }} className="contents">
         <img
           className="h-full w-full rounded-md object-cover group-hover:h-[85%] group-hover:rounded-bl-none group-hover:rounded-br-none"

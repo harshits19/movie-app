@@ -1,4 +1,3 @@
-import HomeNavbar from "../components/HomeNavbar";
 import HomeVideoSection from "../components/HomeVideoSection";
 import HomeCategorySection from "../components/HomeCategorySection";
 import { Outlet } from "react-router-dom";
@@ -11,7 +10,6 @@ const HomePage = () => {
   if (status === "idle") dispatch(fetchData());
   return (
     <div className="bg-[#141414]">
-      <HomeNavbar />
       <HomeVideoSection />
       <HomeCategorySection />
       <Outlet />

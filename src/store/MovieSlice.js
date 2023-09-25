@@ -11,25 +11,25 @@ const initialState = {
   status: "idle",
 };
 
-export const fetchDataByGenre = createAsyncThunk(
-  "tvData/fetchDataByGenre",
+export const fetchMovieByGenre = createAsyncThunk(
+  "tvData/fetchMovieByGenre",
   async (genre) => {
     try {
       const res = await Promise.all([
         fetch(
-          `https://api.themoviedb.org/3/discover/tv?with_genres=${genre}&sort_by=primary_release_date.desc&with_networks=213`,
+          `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&sort_by=primary_release_date.desc&with_networks=1024`,
           fetch_options,
         ),
         fetch(
-          `https://api.themoviedb.org/3/discover/tv?with_genres=${genre}&sort_by=popularity.desc&with_networks=213`,
+          `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&sort_by=popularity.desc&with_networks=1024`,
           fetch_options,
         ),
         fetch(
-          `https://api.themoviedb.org/3/discover/tv?with_genres=${genre}&sort_by=vote_count.desc&with_networks=213`,
+          `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&sort_by=vote_count.desc&with_networks=1024`,
           fetch_options,
         ),
         fetch(
-          `https://api.themoviedb.org/3/discover/tv?with_genres=${genre}&sort_by=vote_average.desc&with_networks=213`,
+          `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}&sort_by=vote_average.desc&with_networks=1024`,
           fetch_options,
         ),
       ]);
@@ -41,15 +41,15 @@ export const fetchDataByGenre = createAsyncThunk(
   },
 );
 
-const TvSlice = createSlice({
-  name: "tvData",
+const MovieSlice = createSlice({
+  name: "movieData",
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchDataByGenre.pending, (state, action) => {
+    builder.addCase(fetchMovieByGenre.pending, (state, action) => {
       state.status = "loading";
     });
-    builder.addCase(fetchDataByGenre.fulfilled, (state, action) => {
+    builder.addCase(fetchMovieByGenre.fulfilled, (state, action) => {
       state.status = "success";
       const data = action.payload;
       state.data.latest = data[0].results;
@@ -57,11 +57,11 @@ const TvSlice = createSlice({
       state.data.trending = data[2].results;
       state.data.topRated = data[3].results;
     });
-    builder.addCase(fetchDataByGenre.rejected, (state, action) => {
+    builder.addCase(fetchMovieByGenre.rejected, (state, action) => {
       state.status = "failed";
     });
   },
 });
-export const selectTvData = (state) => state.tvData.data;
-export const selectTvStatus = (state) => state.tvData.status;
-export default TvSlice.reducer;
+export const selectMovieData = (state) => state.movieData.data;
+export const selectMovieStatus = (state) => state.movieData.status;
+export default MovieSlice.reducer;
