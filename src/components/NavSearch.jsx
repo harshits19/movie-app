@@ -23,11 +23,14 @@ const NavSearch = () => {
       }}
       onSubmit={(e) => {
         e.preventDefault();
+        if (inputRef.current.value)
+          navigate(`/home/search?q=${inputRef.current.value}`);
       }}
     >
       <SearchBtn
         className="h-full w-7 cursor-pointer "
         onClick={() => setSearchState(!searchState)}
+        title="Search"
       />
       <input
         className={`h-full focus:outline-none ${
@@ -46,8 +49,9 @@ const NavSearch = () => {
       />
       {searchVal?.length > 0 && (
         <CloseBtn
-          className="h-full w-7 cursor-pointer "
+          className="h-full w-7 cursor-pointer"
           onClick={() => setSearchVal("")}
+          title="Close"
         />
       )}
     </form>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import StripeShimmer from "./StripeShimmer";
 import { selectHomeData } from "../store/DataSlice";
 import { BsFillPlayFill as PlayBtn } from "react-icons/bs";
 import { AiOutlineInfoCircle as InfoBtn } from "react-icons/ai";
@@ -8,7 +9,8 @@ const HomeVideoSection = () => {
   const { nfOriginals } = useSelector(selectHomeData);
   if (!nfOriginals) return;
   const mainMovie = nfOriginals[Math.floor(Math.random() * 10)];
-  return (
+
+  return mainMovie ? (
     <div className="relative">
       <div className="absolute inset-0 contents">
         <div className="pointer-events-none relative h-full min-h-[20rem] overflow-hidden sm:aspect-video">
@@ -40,7 +42,7 @@ const HomeVideoSection = () => {
               className="contents"
             >
               <div className="flex cursor-pointer items-center gap-x-1 rounded bg-white px-2 py-1 text-xs font-bold text-black hover:bg-opacity-80 sm:text-sm md:px-4 lg:px-6 lg:py-1.5 lg:text-base">
-                <PlayBtn className="h-6 w-6 md:h-8 md:w-8" />
+                <PlayBtn className="h-6 w-6 md:h-8 md:w-8" title="Play" />
                 Play
               </div>
             </Link>
@@ -50,13 +52,20 @@ const HomeVideoSection = () => {
               className="contents"
             >
               <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded bg-[#6d6d6eb3] px-2 py-1 text-xs font-semibold text-white hover:bg-[#6d6d6e66] sm:text-sm md:gap-x-[0.75rem] md:px-4 lg:px-6 lg:py-1.5 lg:text-base">
-                <InfoBtn className="h-5 w-5 fill-white md:h-7 md:w-7" />
+                <InfoBtn
+                  className="h-5 w-5 fill-white md:h-7 md:w-7"
+                  title="Info"
+                />
                 More Info
               </div>
             </Link>
           </div>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className="ml-8 min-h-screen w-full pt-20 sm:ml-12 md:pt-36">
+      <StripeShimmer />
     </div>
   );
 };

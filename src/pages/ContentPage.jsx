@@ -18,8 +18,8 @@ const ContentPage = () => {
   )?.toDateString();
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => (document.body.style.overflow = "auto");
+    document.body.style.overflowY = "hidden";
+    return () => (document.body.style.overflowY = "auto");
   }, []);
 
   return (
@@ -37,8 +37,8 @@ const ContentPage = () => {
               <CloseBtn className="h-8 w-8 rounded-full bg-[#141414] fill-white p-[7px] hover:bg-[#1414149c]" />
             </Link>
           </div>
-          <div className="absolute top-1/2 ml-4 w-full sm:top-2/3 sm:ml-8 sm:w-2/3">
-            <div className="text-xl font-bold sm:text-3xl lg:text-5xl">
+          <div className="absolute top-1/2 ml-4 w-auto sm:top-2/3 sm:ml-8 sm:w-2/3">
+            <div className="line-clamp-2 text-xl font-bold sm:text-3xl lg:text-5xl">
               {item?.title || item?.name || item?.original_name}
             </div>
             <div className="mt-4 flex">
@@ -46,9 +46,18 @@ const ContentPage = () => {
                 <PlayBtn className="h-6 w-6 md:h-8 md:w-8" />
                 Play
               </div>
-              <AddBtn className="mx-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[3px] hover:border-[#e5e5e5]" />
-              <LikeBtn className="mr-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[7px] hover:border-[#e5e5e5]" />
-              <DislikeBtn className="mr-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[7px] hover:border-[#e5e5e5]" />
+              <AddBtn
+                className="mx-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[3px] hover:border-[#e5e5e5]"
+                title="Add to list"
+              />
+              <LikeBtn
+                className="mr-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[7px] hover:border-[#e5e5e5]"
+                title="Like"
+              />
+              <DislikeBtn
+                className="mr-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[7px] hover:border-[#e5e5e5]"
+                title="Dislike"
+              />
             </div>
           </div>
         </div>

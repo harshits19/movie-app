@@ -8,6 +8,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 .cardContainer::-webkit-scrollbar {
   display: none;
@@ -15,36 +16,92 @@ body {
 .categoryStripes > div:not(:first-child) {
   margin-top: -12rem;
 }
-.shine {
-  background: #3a3a3a;
-  background-image: linear-gradient(
-    to right,
-    #3a3a3a 0%,
-    #3f3f3f 20%,
-    #3a3a3a 40%,
-    #3a3a3a 100%
-  );
-  background-repeat: no-repeat;
-  background-size: 800px 400px;
-  display: inline-block;
+.lolomoRow {
+  -webkit-transition: -webkit-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+  transition: -webkit-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+  -o-transition: -o-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+  -moz-transition:
+    transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s,
+    -moz-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+  transition: transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
+  transition:
+    transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s,
+    -webkit-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s,
+    -moz-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s,
+    -o-transform 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s;
   position: relative;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: placeholderShimmer;
-  animation-timing-function: linear;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-fill-mode: forwards;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-name: placeholderShimmer;
-  -webkit-animation-timing-function: linear;
 }
-@keyframes placeholderShimmer {
-  0% {
-    background-position: -468px 0;
+@-webkit-keyframes pulsateAnimation {
+  from {
+    background-color: #1a1a1a;
   }
-
-  100% {
-    background-position: 468px 0;
+  25% {
+    background-color: #333;
   }
+  50% {
+    background-color: #1a1a1a;
+  }
+  to {
+    background-color: #1a1a1a;
+  }
+}
+@-moz-keyframes pulsateAnimation {
+  from {
+    background-color: #1a1a1a;
+  }
+  25% {
+    background-color: #333;
+  }
+  50% {
+    background-color: #1a1a1a;
+  }
+  to {
+    background-color: #1a1a1a;
+  }
+}
+@-o-keyframes pulsateAnimation {
+  from {
+    background-color: #1a1a1a;
+  }
+  25% {
+    background-color: #333;
+  }
+  50% {
+    background-color: #1a1a1a;
+  }
+  to {
+    background-color: #1a1a1a;
+  }
+}
+@keyframes pulsateAnimation {
+  from {
+    background-color: #1a1a1a;
+  }
+  25% {
+    background-color: #333;
+  }
+  50% {
+    background-color: #1a1a1a;
+  }
+  to {
+    background-color: #1a1a1a;
+  }
+}
+.pulsate {
+  -webkit-animation-duration: 3.6s;
+  -moz-animation-duration: 3.6s;
+  -o-animation-duration: 3.6s;
+  animation-duration: 3.6s;
+  -webkit-animation-name: pulsateAnimation;
+  -moz-animation-name: pulsateAnimation;
+  -o-animation-name: pulsateAnimation;
+  animation-name: pulsateAnimation;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -moz-animation-timing-function: ease-in-out;
+  -o-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
 }

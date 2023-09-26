@@ -22,13 +22,15 @@ const ItemCard = ({ item, type }) => {
       <div className="hidden min-h-fit rounded-bl-md rounded-br-md bg-[#252525] p-2 group-hover:flex group-hover:h-fit group-hover:flex-col group-hover:shadow-[0_0_1rem_#00000099,0_6px_6px_#00000080]">
         <div className="flex justify-between">
           <div className="flex items-center">
-            <PlayBtn
-              className="mr-0.5 h-[30px] w-[30px] rounded-full hover:text-[#e5e5e5]"
-              title="Play"
-            />
+            <Link to={"" + item?.id} state={{ item, type }}>
+              <PlayBtn
+                className="mr-0.5 h-[30px] w-[30px] rounded-full hover:text-[#e5e5e5]"
+                title="Play"
+              />
+            </Link>
             <AddBtn
               className="mr-1 h-[25px] w-[25px] rounded-full border-2 border-[#ffffff80] p-[3px] hover:border-[#e5e5e5]"
-              title="Add to playlist"
+              title="Add to list"
             />
             <LikeBtn
               className="mr-1 h-[25px] w-[25px] rounded-full border-2 border-[#ffffff80] p-[0_4px] hover:border-[#e5e5e5]"
@@ -36,7 +38,7 @@ const ItemCard = ({ item, type }) => {
             />
             <DislikeBtn
               className="mr-1 h-[25px] w-[25px] rounded-full border-2 border-[#ffffff80] p-[0_4px] hover:border-[#e5e5e5]"
-              title="Like"
+              title="Dislike"
             />
           </div>
           <Link to={"" + item?.id} state={{ item, type }}>
@@ -46,7 +48,7 @@ const ItemCard = ({ item, type }) => {
             />
           </Link>
         </div>
-        <div className="text-sm font-bold">
+        <div className="line-clamp-2 text-ellipsis text-[0.8rem] font-bold">
           {item?.title || item?.name || item?.original_name}
         </div>
         <div className="text-[0.65rem] font-bold text-green-500 ">
@@ -54,7 +56,9 @@ const ItemCard = ({ item, type }) => {
             ? Math.round(item?.vote_average * 10) + "% Match"
             : "80% Match"}
         </div>
-        <div className="text-[0.65rem]">{useGenres(type, item?.genre_ids)}</div>
+        <div className="text-[0.6rem] font-semibold">
+          {useGenres(type, item?.genre_ids)}
+        </div>
       </div>
     </div>
   );

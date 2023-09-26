@@ -313,7 +313,6 @@ export const AuthPageData = {
     },
   },
 };
-
 export const ProfileDpData = {
   items: [
     "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABQLE78HOjF1_2nkm44Bg9TZFhoKsLZckfq01Apnk6XXJwiTRGGXLrEyDhyhQqzvdEd7TCvntLCe0XtOFK-qMdA0zjQO57HmyTw.png?r=85b",
@@ -328,14 +327,6 @@ export const ProfileDpData = {
     "https://occ-0-4345-3647.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABSwgTGdQ10_g7S40OTUOZyuo_rI67XiWBqLuavAUpwPLHazdnhEqlQVhNoNpU9N5s7ffdmHsrDYYBsCT2UAGXXi2ppwi_kU0Qg.png?r=5eb",
   ],
 };
-export const fetch_options = {
-  method: "GET",
-  headers: {
-    accept: "application/json",
-    Authorization: import.meta.env.VITE_REACT_APP_API_KEY,
-  },
-};
-
 export const Genres = {
   movie: [
     { id: 28, name: "Action" },
@@ -376,4 +367,11 @@ export const Genres = {
     { id: 10768, name: "War & Politics" },
     { id: 37, name: "Western" },
   ],
+};
+export const fetch_options = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: import.meta.env.VITE_REACT_APP_API_KEY,
+  },
 };

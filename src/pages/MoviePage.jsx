@@ -1,10 +1,11 @@
-import CategoryStripes from "../components/CategoryStripes";
-import { Genres } from "../utilities/Constants";
-import { fetchMovieByGenre } from "../store/MovieSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { selectMovieData, selectMovieStatus } from "../store/MovieSlice";
-import StripeShimmer from "../components/StripeShimmer";
 import { Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import CategoryStripes from "../components/CategoryStripes";
+import StripeShimmer from "../components/StripeShimmer";
+import { fetchMovieByGenre } from "../store/MovieSlice";
+import { selectMovieData, selectMovieStatus } from "../store/MovieSlice";
+import { Genres } from "../utilities/Constants";
+
 const MoviePage = () => {
   const dispatch = useDispatch();
   const selectHandler = (event) => {

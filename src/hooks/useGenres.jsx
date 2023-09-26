@@ -9,8 +9,9 @@ const useGenres = (dataType, genreIDs) => {
   const selectedGenres = genreArray
     .filter((genre) => genreIds.includes(genre.id))
     .map((genre) => genre.name);
-  return selectedGenres.map((item, index) => {
-    const isLast = index === genreIds.length - 1;
+  const limitedGenres = selectedGenres.slice(0, 3);
+  return limitedGenres.map((item, index) => {
+    const isLast = index === limitedGenres.length - 1;
     return (
       <span key={index}>
         <span>{" " + item}</span>

@@ -1,17 +1,17 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
+import store from "./store/Store";
 import Body from "./components/Body";
+import HomeBody from "./components/HomeBody";
 import AuthPage from "./pages/AuthPage";
 import LandingPage from "./pages/LandingPage";
+import ErrorPage from "./pages/ErrorPage";
 const HomePage = lazy(() => import("./pages/HomePage"));
 const TvPage = lazy(() => import("./pages/TvPage"));
 const MoviePage = lazy(() => import("./pages/MoviePage"));
 import ContentPage from "./pages/ContentPage";
-import ErrorPage from "./pages/ErrorPage";
-import store from "./store/Store";
 import SearchPage from "./pages/SearchPage";
-import HomeBody from "./components/HomeBody";
 
 const App = () => {
   return (

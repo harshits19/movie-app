@@ -1,10 +1,11 @@
-import CategoryStripes from "../components/CategoryStripes";
-import { Genres } from "../utilities/Constants";
-import { fetchDataByGenre } from "../store/TvSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { selectTvData, selectTvStatus } from "../store/TvSlice";
-import StripeShimmer from "../components/StripeShimmer";
 import { Outlet } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import CategoryStripes from "../components/CategoryStripes";
+import StripeShimmer from "../components/StripeShimmer";
+import { fetchDataByGenre } from "../store/TvSlice";
+import { selectTvData, selectTvStatus } from "../store/TvSlice";
+import { Genres } from "../utilities/Constants";
+
 const TvPage = () => {
   const dispatch = useDispatch();
   const selectHandler = (event) => {
@@ -41,7 +42,11 @@ const TvPage = () => {
         <div className="categoryStripes relative pt-8">
           <CategoryStripes data={latest} title="Latest Tv Shows" type="tv" />
           <CategoryStripes data={popular} title="Popular TV Shows" type="tv" />
-          <CategoryStripes data={trending} title="Trending" type="tv" />
+          <CategoryStripes
+            data={trending}
+            title="Trending TV Shows"
+            type="tv"
+          />
           <CategoryStripes
             data={topRated}
             title="Top Rated TV Shows"

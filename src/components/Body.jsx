@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { UserEmailContext } from "../utilities/UserContext";
 import { useDispatch } from "react-redux";
+import { UserEmailContext } from "../utilities/UserContext";
 import { addUser } from "../store/UserSlice";
 import { auth } from "../utilities/Firebase";
 import { onAuthStateChanged } from "firebase/auth";

@@ -1,6 +1,6 @@
 import ItemCard from "./ItemCard";
 
-const CategoryStripes = ({ data, title = "Movies", type }) => {
+const CategoryStripes = ({ data, title = "", type }) => {
   if (!data) return;
 
   return (

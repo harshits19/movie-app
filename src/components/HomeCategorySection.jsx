@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
-import { selectHomeData } from "../store/DataSlice";
 import CategoryStripes from "./CategoryStripes";
+import { selectHomeData } from "../store/DataSlice";
+
 const HomeCategorySection = () => {
   const { trendingMovies, trendingTV, nfOriginals, netflixTV } =
     useSelector(selectHomeData);
