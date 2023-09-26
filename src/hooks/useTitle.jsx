@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-const useTitle = (title = "Moviefliz", tagLine = "") => {
+const useTitle = (title = "", tagLine = " - Moviefliz") => {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = title + tagLine;

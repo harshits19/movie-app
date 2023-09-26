@@ -4,6 +4,7 @@ import CategoryStripes from "../components/CategoryStripes";
 import StripeShimmer from "../components/StripeShimmer";
 import { fetchMovieByGenre } from "../store/MovieSlice";
 import { selectMovieData, selectMovieStatus } from "../store/MovieSlice";
+import useTitle from "../hooks/useTitle";
 import { Genres } from "../utilities/Constants";
 
 const MoviePage = () => {
@@ -13,6 +14,7 @@ const MoviePage = () => {
   };
   const { latest, popular, trending, topRated } = useSelector(selectMovieData);
   const status = useSelector(selectMovieStatus);
+  useTitle("Movies");
 
   return (
     <div className="relative">

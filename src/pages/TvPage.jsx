@@ -4,6 +4,7 @@ import CategoryStripes from "../components/CategoryStripes";
 import StripeShimmer from "../components/StripeShimmer";
 import { fetchDataByGenre } from "../store/TvSlice";
 import { selectTvData, selectTvStatus } from "../store/TvSlice";
+import useTitle from "../hooks/useTitle";
 import { Genres } from "../utilities/Constants";
 
 const TvPage = () => {
@@ -13,6 +14,7 @@ const TvPage = () => {
   };
   const { latest, popular, trending, topRated } = useSelector(selectTvData);
   const status = useSelector(selectTvStatus);
+  useTitle("TV Shows");
 
   return (
     <div className="relative">

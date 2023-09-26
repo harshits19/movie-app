@@ -1,7 +1,5 @@
 import { lazy, Suspense } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./store/Store";
+import { Routes, Route } from "react-router-dom";
 import Body from "./components/Body";
 import HomeBody from "./components/HomeBody";
 import AuthPage from "./pages/AuthPage";
@@ -15,74 +13,58 @@ import SearchPage from "./pages/SearchPage";
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <RouterProvider router={appRouter}>
-        <Body />
-      </RouterProvider>
-    </Provider>
+    <Routes>
+      <Route path="*" element={<ErrorPage />} />
+      <Route path="/" element={<Body />}>
+        {/* non protected routes */}
+        <Route index path="/" element={<LandingPage />} />
+        <Route path="login" element={<AuthPage />} />
+      </Route>
+      {/* protected routes */}
+      <Route path="home" element={<HomeBody />}>
+        <Route
+          path="/home"
+          element={
+            <Suspense>
+              <HomePage />
+            </Suspense>
+          }
+        >
+          <Route index path=":contentId" element={<ContentPage />} />
+        </Route>
+        <Route
+          path="/home/tv"
+          element={
+            <Suspense>
+              <TvPage />
+            </Suspense>
+          }
+        >
+          <Route index path=":tvId" element={<ContentPage />} />
+        </Route>
+        <Route
+          path="/home/movie"
+          element={
+            <Suspense>
+              <MoviePage />
+            </Suspense>
+          }
+        >
+          <Route index path=":movieId" element={<ContentPage />} />
+        </Route>
+        <Route
+          path="/home/search"
+          element={
+            <Suspense>
+              <SearchPage />
+            </Suspense>
+          }
+        >
+          <Route index path=":searchParams" element={<ContentPage />} />
+        </Route>
+      </Route>
+    </Routes>
   );
 };
-
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <Body />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/",
-        element: <LandingPage />,
-      },
-      { path: "/login", element: <AuthPage /> },
-      {
-        path: "/home",
-        element: <HomeBody />,
-        children: [
-          {
-            path: "/home",
-            element: (
-              <Suspense>
-                <HomePage />
-              </Suspense>
-            ),
-            children: [
-              {
-                path: "/home/:contentId",
-                element: <ContentPage />,
-              },
-            ],
-          },
-          {
-            path: "/home/tv",
-            element: (
-              <Suspense>
-                <TvPage />
-              </Suspense>
-            ),
-            children: [{ path: "/home/tv/:tvId", element: <ContentPage /> }],
-          },
-          {
-            path: "/home/movie",
-            element: (
-              <Suspense>
-                <MoviePage />
-              </Suspense>
-            ),
-            children: [
-              { path: "/home/movie/:movieId", element: <ContentPage /> },
-            ],
-          },
-          {
-            path: "/home/search",
-            element: <SearchPage />,
-            children: [
-              { path: "/home/search/:contentId", element: <ContentPage /> },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-]);
 
 export default App;
