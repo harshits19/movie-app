@@ -1,7 +1,7 @@
-import ItemCard from "./ItemCard";
+import ItemCard from "./ItemCard"
 
 const CategoryStripes = ({ data, title = "", type }) => {
-  if (!data) return;
+  if (!data) return
 
   return (
     <div className="flex flex-col">
@@ -15,10 +15,10 @@ const CategoryStripes = ({ data, title = "", type }) => {
               item?.backdrop_path && (
                 <ItemCard item={item} type={type} key={item?.id} />
               )
-            );
+            )
           })}
       </div>
     </div>
-  );
-};
-export default CategoryStripes;
+  )
+}
+export default CategoryStripes

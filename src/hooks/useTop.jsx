@@ -1,15 +1,15 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
 
 const useTop = () => {
-  const routePath = useLocation();
+  const routePath = useLocation()
   const onTop = () => {
-    window.scrollTo(0, 0);
-  };
+    window.scrollTo(0, 0)
+  }
   useEffect(() => {
-    onTop();
-  }, [routePath]);
+    onTop()
+  }, [routePath])
 
-  return null;
-};
-export default useTop;
+  return null
+}
+export default useTop
