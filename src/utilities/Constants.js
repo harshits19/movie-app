@@ -2,14 +2,17 @@ export const LandingPageData = {
   bgImages: {
     urlOne: "https://assets.nflxext.com/ffe/siteui/vlv3/855ed6e2-d9f1-4afd-90da-96023ec747c3/85eb5b91-25ed-4965-ace9-ba8e4a0ead8d/IN-en-20230828-popsignuptwoweeks-perspective_alpha_website_large.jpg",
     urlTwo: "https://assets.nflxext.com/ffe/siteui/vlv3/42df4e1f-bef6-499e-87ff-c990584de314/5e7c383c-1f88-4983-b4da-06e14c0984ba/IN-en-20230904-popsignuptwoweeks-perspective_alpha_website_large.jpg",
+    urlThree: "https://assets.nflxext.com/ffe/siteui/vlv3/9db4a880-3034-4e98-bdea-5d983e86bf52/b5953637-091d-4e02-9754-2bfadc8a8f7c/IN-en-20230925-popsignuptwoweeks-perspective_alpha_website_large.jpg",
   },
   en: {
     mainSection: {
-      title: "The biggest Indian hits. Ready to watch here from ₹ 149.",
+      title: "Unlimited movies, TV shows and more",
       lineOne: "Join today. Cancel anytime.",
       lineTwo: "Ready to watch? Enter your email to create or restart your membership.",
       signUpBtnText: "Get Started",
       inputInnerText: "Email address",
+      signInBtnText: "Sign In",
+      langSelectorText: "English",
     },
     infoSection: [
       {
@@ -91,41 +94,43 @@ export const LandingPageData = {
   },
   hi: {
     mainSection: {
-      title: "सबसे बड़े भारतीय हिट। ₹ 149 से देखने के लिए यहां तैयार है।",
-      lineOne: "आज ही शामिल हों। कभी भी रद्द करें।",
-      lineTwo: "तैयार होने के लिए? अपना ईमेल दर्ज करें और अपने सदस्यता को बनाएं या पुनः प्रारंभ करें।",
+      title: "अनलिमिटेड फ़िल्में, टीवी शो के साथ भी बहुत कुछ",
+      lineOne: "जहां चाहें देखें. जब चाहें कैंसल करें.",
+      lineTwo: "देखने के लिए तैयार हैं? अपनी मेंबरशिप बनाने या रीस्टार्ट करने के लिए अपना ईमेल एड्रेस डालें.",
       signUpBtnText: "शुरू हो जाओ",
       inputInnerText: "ईमेल पता",
+      signInBtnText: "साइन इन करें",
+      langSelectorText: "हिंदी",
     },
     infoSection: [
       {
         id: 1,
         title: "अपने टीवी पर आनंद लें",
-        description: "स्मार्ट टीवी, PlayStation, Xbox, Chromecast, Apple TV, ब्लू-रे प्लेयर्स और अधिक पर देखें।",
+        description: "स्मार्ट टीवी, PlayStation, Xbox, Chromecast, Apple TV, ब्लू-रे प्लेयर्स और अधिक पर देखें",
         imgURL: "https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/tv.png",
       },
       {
         id: 2,
-        title: "अपने शो को ऑफलाइन देखने के लिए डाउनलोड करें",
-        description: "आसानी से अपने पसंदीदा को बचाएं और हमेशा कुछ देखने के लिए हमेशा कुछ हो।",
+        title: "ऑफ़लाइन देखने के लिए अपने शो डाउनलोड करें",
+        description: "अपने पसंदीदा शो और फ़िल्में सेव करें, ताकि आप कभी भी इन्हें देख सकें.",
         imgURL: "https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/mobile-0819.jpg",
       },
       {
         id: 3,
         title: "हर जगह देखें",
-        description: "अपने फोन, टैबलेट, लैपटॉप, और टीवी पर असीमित मूवीज और टीवी शोस देखें।",
+        description: "अपने फोन, टैबलेट, लैपटॉप, और टीवी पर असीमित मूवीज और टीवी शोस देखें",
         imgURL: "https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/device-pile-in.png",
       },
       {
         id: 4,
         title: "बच्चों के लिए प्रोफ़ाइल बनाएँ",
-        description: "अपने सदस्यता के साथ उनके पसंदीदा चरणों में उन्हें उनके पसंदीदा चरित्रों के साथ बच्चों को भेजें - यह उनके लिए एक खास स्थान है, जो आपके सदस्यता के साथ मुफ्त है।",
+        description: "अपने सदस्यता के साथ उनके पसंदीदा चरणों में उन्हें उनके पसंदीदा चरित्रों के साथ बच्चों को भेजें - यह उनके लिए एक खास स्थान है, जो आपके सदस्यता के साथ मुफ्त है",
         imgURL: "https://occ-0-5298-3647.1.nflxso.net/dnm/api/v6/19OhWN2dO19C9txTON9tvTFtefw/AAAABVr8nYuAg0xDpXDv0VI9HUoH7r2aGp4TKRCsKNQrMwxzTtr-NlwOHeS8bCI2oeZddmu3nMYr3j9MjYhHyjBASb1FaOGYZNYvPBCL.png?r=54d",
       },
     ],
     faqSection: {
       title: "अक्सर पूछे जाने वाले प्रश्न",
-      lineOne: "तैयार होने के लिए? अपना ईमेल दर्ज करें और अपने सदस्यता को बनाएं या पुनः प्रारंभ करें।",
+      lineOne: "तैयार होने के लिए? अपना ईमेल दर्ज करें और अपने सदस्यता को बनाएं या पुनः प्रारंभ करें",
       signUpBtnText: "शुरू हो जाओ",
       inputInnerText: "ईमेल पता",
       accordionData: [
@@ -138,7 +143,7 @@ export const LandingPageData = {
         {
           title: "Netflix कितना कुछ मांगता है?",
           id: 2,
-          description: "अपने स्मार्टफोन, टैबलेट, स्मार्ट टीवी, लैपटॉप, या स्ट्रीमिंग डिवाइस पर Netflix देखें, सबके लिए एक पैक्ट मासिक शुल्क पर। योजनाएँ ₹ 149 से ₹ 649 प्रतिमाह तक हैं। कोई अतिरिक्त लागत नहीं, कोई संविदान नहीं।",
+          description: "अपने स्मार्टफोन, टैबलेट, स्मार्ट टीवी, लैपटॉप, या स्ट्रीमिंग डिवाइस पर Netflix देखें, सबके लिए एक पैक्ट मासिक शुल्क पर। योजनाएँ ₹ 149 से ₹ 649 प्रतिमाह तक हैं। कोई अतिरिक्त लागत नहीं, कोई संविदान नहीं",
         },
         {
           title: "मैं कहां देख सकता हूँ?",
@@ -149,12 +154,12 @@ export const LandingPageData = {
         {
           title: "मैं कैसे रद्द कर सकता हूँ?",
           id: 4,
-          description: "Netflix में लचीलापूर्णता है। कोई चिढ़चिढ़ा अनुबंध और कोई प्रतिबद्धता नहीं है। आप आसानी से अपने खाते को ऑनलाइन में दो क्लिक में रद्द कर सकते हैं। कोई रद्दीकरण शुल्क नहीं है - कब की शुरुआत और बंद करें।",
+          description: "Netflix में लचीलापूर्णता है। कोई चिढ़चिढ़ा अनुबंध और कोई प्रतिबद्धता नहीं है। आप आसानी से अपने खाते को ऑनलाइन में दो क्लिक में रद्द कर सकते हैं। कोई रद्दीकरण शुल्क नहीं है - कब की शुरुआत और बंद करें",
         },
         {
           title: "Netflix पर मैं क्या देख सकता हूँ?",
           id: 5,
-          description: "Netflix में फीचर फ़िल्में, डॉक्यूमेंट्री, टीवी शो, एनिमे, पुरस्कार जीतने वाले Netflix मूल, और अधिक की बड़ी लाइब्रेरी है। जब चाहें, जितना चाहें देखें।",
+          description: "Netflix में फीचर फ़िल्में, डॉक्यूमेंट्री, टीवी शो, एनिमे, पुरस्कार जीतने वाले Netflix मूल, और अधिक की बड़ी लाइब्रेरी है। जब चाहें, जितना चाहें देखें",
         },
         {
           title: "Netflix बच्चों के लिए अच्छा है क्या?",
@@ -180,6 +185,7 @@ export const AuthPageData = {
   bgImages: {
     urlOne: "https://assets.nflxext.com/ffe/siteui/vlv3/855ed6e2-d9f1-4afd-90da-96023ec747c3/85eb5b91-25ed-4965-ace9-ba8e4a0ead8d/IN-en-20230828-popsignuptwoweeks-perspective_alpha_website_large.jpg",
     urlTwo: "https://assets.nflxext.com/ffe/siteui/vlv3/42df4e1f-bef6-499e-87ff-c990584de314/5e7c383c-1f88-4983-b4da-06e14c0984ba/IN-en-20230904-popsignuptwoweeks-perspective_alpha_website_large.jpg",
+    urlThree: "https://assets.nflxext.com/ffe/siteui/vlv3/9db4a880-3034-4e98-bdea-5d983e86bf52/b5953637-091d-4e02-9754-2bfadc8a8f7c/IN-en-20230925-popsignuptwoweeks-perspective_alpha_website_large.jpg",
   },
   en: {
     formSection: {

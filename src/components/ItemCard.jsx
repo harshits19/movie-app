@@ -15,7 +15,9 @@ const ItemCard = ({ item, type }) => {
             <Link to={"" + item?.id} state={{ item, type }}>
               <PlayBtn className="mr-0.5 h-[30px] w-[30px] rounded-full hover:text-[#e5e5e5]" title="Play" />
             </Link>
-            <AddBtn className="mr-1 h-[25px] w-[25px] rounded-full border-2 border-[#ffffff80] p-[3px] hover:border-[#e5e5e5]" title="Add to list" />
+            <Link>
+              <AddBtn className="mr-1 h-[25px] w-[25px] rounded-full border-2 border-[#ffffff80] p-[3px] hover:border-[#e5e5e5]" title="Add to list" />
+            </Link>
             <LikeBtn className="mr-1 h-[25px] w-[25px] rounded-full border-2 border-[#ffffff80] p-[0_4px] hover:border-[#e5e5e5]" title="Like" />
             <DislikeBtn className="mr-1 h-[25px] w-[25px] rounded-full border-2 border-[#ffffff80] p-[0_4px] hover:border-[#e5e5e5]" title="Dislike" />
           </div>

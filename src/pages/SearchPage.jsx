@@ -31,7 +31,7 @@ const SearchPage = () => {
         <div className="categoryStripes">
           {data?.movie?.length > 0 && <CategoryStripes data={data?.movie} title="Movies" type="movie" />}
           {data?.tv?.length > 0 && <CategoryStripes data={data?.tv} title="Tv Shows" type="tv" />}
-          {(data?.movie?.length && data?.tv?.length) === 0 && <div className="pt-16 text-center sm:text-2xl md:text-3xl lg:text-5xl">No search results found</div>}
+          {data?.movie?.length === 0 && data?.tv?.length === 0 && <div className="pt-16 text-center sm:text-2xl md:text-3xl lg:text-5xl">No search results found</div>}
         </div>
       </div>
       <Outlet />

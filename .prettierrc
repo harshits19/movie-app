@@ -3,5 +3,5 @@
   "pluginSearchDirs": false,
   "bracketSameLine": true,
   "semi": false,
-  "printWidth": 350
+  "printWidth": 250
 }

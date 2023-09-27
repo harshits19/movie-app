@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
 import { Outlet, useNavigate } from "react-router-dom"
-import { UserEmailContext } from "../utilities/UserContext"
+import { UserEmailContext, LanguageContext } from "../utilities/Context"
 import { auth } from "../utilities/Firebase"
 import { onAuthStateChanged } from "firebase/auth"
 
 const Body = () => {
   const [userSignupEmail, setUserSignupEmail] = useState({})
+  const [language, setLanguage] = useState("en")
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -17,9 +18,11 @@ const Body = () => {
   }, [])
 
   return (
-    <UserEmailContext.Provider value={{ userSignupEmail, setUserSignupEmail }}>
-      <Outlet />
-    </UserEmailContext.Provider>
+    <LanguageContext.Provider value={{ language, setLanguage }}>
+      <UserEmailContext.Provider value={{ userSignupEmail, setUserSignupEmail }}>
+        <Outlet />
+      </UserEmailContext.Provider>
+    </LanguageContext.Provider>
   )
 }
 

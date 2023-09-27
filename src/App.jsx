@@ -11,6 +11,7 @@ const MoviePage = lazy(() => import("./pages/MoviePage"))
 import ContentPage from "./pages/ContentPage"
 import SearchPage from "./pages/SearchPage"
 import StripeShimmer from "./components/StripeShimmer"
+import UserLibrary from "./pages/UserLibrary"
 
 const App = () => {
   return (
@@ -67,6 +68,9 @@ const App = () => {
         </Route>
         <Route path="/home/search" element={<SearchPage />}>
           <Route index path=":searchParams" element={<ContentPage />} />
+        </Route>
+        <Route path="/home/list" element={<UserLibrary />}>
+          <Route index path=":contentId" element={<ContentPage />} />
         </Route>
       </Route>
     </Routes>

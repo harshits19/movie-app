@@ -1,15 +1,12 @@
-import { useContext, useState, useEffect, useRef } from "react"
+import { useContext, useState, useRef, useLayoutEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { addUser } from "../store/UserSlice"
-import { UserEmailContext } from "../utilities/UserContext"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { validateEmail, validatePassword, validateName } from "../utilities/Validation"
+import { UserEmailContext,LanguageContext } from "../utilities/Context"
+import { validateEmail, validatePassword } from "../hooks/useValidation"
 import ErrorBox from "../components/ErrorBox"
-import { auth } from "../utilities/Firebase"
 import { OGlogo } from "../assets/SVGs"
-import { AuthPageData, ProfileDpData } from "../utilities/Constants"
-import Spinner from "../assets/spinner.svg"
+import { AuthPageData } from "../utilities/Constants"
+import useAuth from "../hooks/useAuth"
 
 const InputValidator = ({ text }) => {
   return <div className="pt-2 text-[13px] leading-[13px] text-[#e87c03]">{text}</div>
@@ -17,9 +14,9 @@ const InputValidator = ({ text }) => {
 
 const AuthPage = () => {
   const { userSignupEmail, setUserSignupEmail } = useContext(UserEmailContext)
+  const {language} = useContext(LanguageContext);
   const [emailError, setEmailError] = useState(false)
   const [passError, setPassError] = useState(false)
-  const [nameError, setNameError] = useState(false)
   const [authError, setAuthError] = useState("")
   const [authState, setAuthState] = useState("login")
   const [loading, setLoading] = useState(false)
@@ -29,57 +26,20 @@ const AuthPage = () => {
   const passRef = useRef()
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (userSignupEmail.email) setAuthState("signup")
-    emailRef.current.value = userSignupEmail?.email || ""
-  }, [])
-  const toggleVisibility = () => {
-    passRef.current.type === "password" ? (passRef.current.type = "text") : (passRef.current.type = "password")
-    setShow(!show)
+  const handleFormSubmit = (e) => {
+    const isValidFormValues = !emailError && !passError && emailRef.current?.value && passRef.current?.value
+    e.preventDefault()
+    isValidFormValues && useAuth(emailRef, passRef, nameRef, dispatch, setLoading, setAuthError, setAuthState, authState)
   }
 
-  const handleAuth = () => {
-    const isValid = emailRef.current.value && passRef.current.value
-    isValid && setLoading(true)
-    if (authState == "signup" && nameRef && isValid)
-      createUserWithEmailAndPassword(auth, emailRef?.current?.value, passRef?.current?.value)
-        .then((user) => {
-          setUserSignupEmail({})
-          setLoading(false)
-          updateProfile(user?.user, {
-            displayName: nameRef?.current?.value,
-            photoURL: ProfileDpData?.items[Math.floor(Math.random() * 10)],
-          })
-            .then(() => {
-              const { email, displayName, photoURL } = auth.currentUser
-              dispatch(
-                addUser({
-                  email: email,
-                  name: displayName,
-                  photoURL: photoURL,
-                }),
-              )
-            })
-            .catch((error) => {
-              console.log(error.code)
-              setLoading(false)
-            })
-          setAuthState("login")
-        })
-        .catch((err) => {
-          setAuthError(err.code)
-          setLoading(false)
-        })
-    else if (authState == "login" && isValid)
-      signInWithEmailAndPassword(auth, emailRef?.current?.value, passRef?.current?.value)
-        .then(() => {
-          setUserSignupEmail({})
-          setLoading(false)
-        })
-        .catch((err) => {
-          setAuthError(err.code)
-          setLoading(false)
-        })
+  useLayoutEffect(() => {
+    if (userSignupEmail.email) setAuthState("signup")
+    emailRef.current.value = userSignupEmail?.email || ""
+    setUserSignupEmail("")
+  }, [])
+  const toggleVisibility = () => {
+    passRef.current.type = passRef.current.type === "password" ? "text" : "password"
+    setShow(!show)
   }
 
   return (
@@ -99,75 +59,98 @@ const AuthPage = () => {
         <div className="relative min-h-screen w-full px-[5%] before:block before:h-[56px] before:content-[''] md:mx-auto md:max-w-[450px] md:bg-transparent md:px-0 md:before:h-[96px]">
           <div className="m-0 box-border flex min-h-[540px] w-full flex-col rounded bg-[#000000bf] px-0 pb-[30px] pt-5 md:min-h-[630px] md:px-[68px] md:pb-10 md:pt-[60px] ">
             <div className="grow">
-              <div className="mb-7 text-[32px] font-medium text-white">{authState == "login" ? AuthPageData["en"].formSection?.formTitle?.signin : AuthPageData["en"].formSection?.formTitle?.signup}</div>
-              {authError && <ErrorBox authError={authError} setAuthState={setAuthState} text={AuthPageData["en"].errorBoxText} />}
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault()
-                  const isValidFormValues = !emailError && !passError
-                  isValidFormValues && handleAuth()
-                }}>
+              <div className="mb-7 text-[32px] font-medium text-white">{authState == "login" ? AuthPageData[language].formSection?.formTitle?.signin : AuthPageData[language].formSection?.formTitle?.signup}</div>
+              {authError && <ErrorBox authError={authError} setAuthState={setAuthState} text={AuthPageData[language].errorBoxText} />}
+              <form onSubmit={handleFormSubmit}>
                 {authState == "signup" && (
                   <div className="max-w-full flex-auto pb-4 ">
-                    <input className={(nameError ? "border-b-2 border-[#e87c03] " : "") + " h-[50px] w-full rounded border-0 bg-[#333333] px-4 text-base font-normal leading-[50px] text-white outline-none"} name="name" type="text" placeholder={AuthPageData["en"].formSection?.placeholderText?.name} ref={nameRef} onBlur={() => validateName(nameRef?.current?.value, setNameError)} />
-                    {nameError && <InputValidator text={AuthPageData["en"].formSection?.validatorText?.name} />}
+                    <input
+                      className="h-[50px] w-full rounded border-0 bg-[#333333] px-4 text-base font-normal leading-[50px] text-white outline-none"
+                      name="name"
+                      type="text"
+                      placeholder={AuthPageData[language].formSection?.placeholderText?.name}
+                      ref={nameRef}
+                    />
                   </div>
                 )}
                 <div className="max-w-full flex-auto pb-4 ">
-                  <input className={(emailError ? "border-b-2 border-[#e87c03] " : "") + " h-[50px] w-full rounded border-0 bg-[#333333] px-4 text-base font-normal leading-[50px] text-white outline-none"} name="email" type="email" placeholder={AuthPageData["en"].formSection?.placeholderText?.email} ref={emailRef} onBlur={() => validateEmail(emailRef?.current?.value, setEmailError)} />
-                  {emailError && <InputValidator text={AuthPageData["en"].formSection?.validatorText?.email} />}
+                  <input
+                    className={(emailError ? "border-b-2 border-[#e87c03] " : "") + " h-[50px] w-full rounded border-0 bg-[#333333] px-4 text-base font-normal leading-[50px] text-white outline-none"}
+                    name="email"
+                    type="email"
+                    placeholder={AuthPageData[language].formSection?.placeholderText?.email}
+                    ref={emailRef}
+                    onBlur={() => validateEmail(emailRef?.current?.value, setEmailError)}
+                  />
+                  {emailError && <InputValidator text={AuthPageData[language].formSection?.validatorText?.email} />}
                 </div>
                 <div className="relative max-w-full flex-auto pb-4">
-                  <input className={(passError ? "border-b-2 border-[#e87c03] " : "") + " h-[50px] w-full rounded border-0 bg-[#333333] pl-4 pr-14 text-base font-normal leading-[50px] text-white outline-none"} name="password" type="password" placeholder={AuthPageData["en"].formSection?.placeholderText?.password} ref={passRef} onBlur={() => validatePassword(passRef?.current?.value, setPassError)} />
+                  <input
+                    className={(passError ? "border-b-2 border-[#e87c03] " : "") + " h-[50px] w-full rounded border-0 bg-[#333333] pl-4 pr-14 text-base font-normal leading-[50px] text-white outline-none"}
+                    name="password"
+                    type="password"
+                    placeholder={AuthPageData[language].formSection?.placeholderText?.password}
+                    ref={passRef}
+                    onBlur={() => validatePassword(passRef?.current?.value, setPassError)}
+                  />
                   <span className="absolute right-0 top-[14px] cursor-pointer px-2 text-sm text-[#8c8c8c]" onClick={toggleVisibility}>
                     {show ? "SHOW" : "HIDE"}
                   </span>
-                  {passError && <InputValidator text={AuthPageData["en"].formSection?.validatorText?.password} />}
+                  {passError && <InputValidator text={AuthPageData[language].formSection?.validatorText?.password} />}
                 </div>
-                <button className="mx-0 mb-3 mt-6 h-[50px] w-full cursor-pointer rounded bg-ogRed text-center font-medium text-white transition-bgColor duration-250ms ease-ogTrans hover:bg-ogRedHover hover:ease-ogTransHover">
-                  {!loading && (authState == "login" ? AuthPageData["en"].formSection?.formTitle?.signin : AuthPageData["en"].formSection?.formTitle?.signup)}
-                  {loading && <img className="mx-auto h-8 w-8" src={Spinner} />}
+                <button className="relative mx-0 mb-3 mt-6 flex h-[50px] w-full cursor-pointer items-center justify-center rounded bg-ogRed text-center font-medium text-white transition-bgColor duration-250ms ease-ogTrans hover:bg-ogRedHover hover:ease-ogTransHover">
+                  {!loading ? (
+                    authState == "login" ? (
+                      AuthPageData[language].formSection?.formTitle?.signin
+                    ) : (
+                      AuthPageData[language].formSection?.formTitle?.signup
+                    )
+                  ) : (
+                    <div className="absolute inset-0">
+                      <div className="loadingSpinner"></div>
+                    </div>
+                  )}
                 </button>
                 <div className="flex justify-between text-[13px] text-[#b3b3b3]">
                   <span className="flex cursor-pointer items-center">
                     <input type="checkbox" name="rememberMe" id="rememberMe" className="h-4 w-4" />
                     <label htmlFor="rememberMe" className="pl-1">
-                      {AuthPageData["en"].formSection?.rememberMeBtnText}
+                      {AuthPageData[language].formSection?.rememberMeBtnText}
                     </label>
                   </span>
-                  <span className="cursor-pointer">{AuthPageData["en"].formSection?.needhelpBtnText}</span>
+                  <span className="cursor-pointer">{AuthPageData[language].formSection?.needhelpBtnText}</span>
                 </div>
               </form>
             </div>
             <div className="grow">
               <div className="mt-4 text-base text-[#b3b3b3]">
-                {authState == "login" ? (
+                {authState === "login" ? (
                   <div>
-                    {AuthPageData["en"].formSection?.formSwitchText?.signin}
+                    {AuthPageData[language].formSection?.formSwitchText?.signin}
                     <span
                       onClick={() => {
                         setAuthState("signup")
                         setAuthError("")
                       }}
                       className="cursor-pointer text-white hover:underline">
-                      {AuthPageData["en"].formSection?.formSwitchText?.signin2}
+                      {AuthPageData[language].formSection?.formSwitchText?.signin2}
                     </span>
                   </div>
                 ) : (
                   <div>
-                    {AuthPageData["en"].formSection?.formSwitchText?.signup}
+                    {AuthPageData[language].formSection?.formSwitchText?.signup}
                     <span
                       onClick={() => {
                         setAuthState("login")
                         setAuthError("")
                       }}
                       className="cursor-pointer text-white hover:underline">
-                      {AuthPageData["en"].formSection?.formSwitchText?.signup2}
+                      {AuthPageData[language].formSection?.formSwitchText?.signup2}
                     </span>
                   </div>
                 )}
               </div>
-              <div className="mt-4 text-[13px] text-[#b3b3b3]">{AuthPageData["en"].formSection?.capchaText}</div>
+              <div className="mt-4 text-[13px] text-[#b3b3b3]">{AuthPageData[language].formSection?.capchaText}</div>
             </div>
           </div>
         </div>

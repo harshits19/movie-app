@@ -14,7 +14,9 @@ const NavMenu = () => {
           <span className="cursor-pointer text-xs font-medium lg:text-sm">Movies</span>
         </Link>
         <span className="cursor-pointer text-xs font-medium lg:text-sm">New & Popular</span>
-        <span className="cursor-pointer text-xs font-medium lg:text-sm">My List</span>
+        <Link to="/home/list" className="contents">
+          <span className="cursor-pointer text-xs font-medium lg:text-sm">My List</span>
+        </Link>
         <span className="hidden cursor-pointer text-xs font-medium lg:inline lg:text-sm">Browse by Languages</span>
       </div>
       <div className="group relative flex md:hidden">
@@ -29,7 +31,9 @@ const NavMenu = () => {
           <Link to="/home/movie" className="contents">
             <span className="cursor-pointer border-t border-[#ffffff40] px-4 py-2 text-sm font-medium">Movies</span>
           </Link>
-          <span className="cursor-pointer border-t border-[#ffffff40] px-4 py-2 text-sm font-medium">My List</span>
+          <Link to="/home/list" className="contents">
+            <span className="cursor-pointer border-t border-[#ffffff40] px-4 py-2 text-sm font-medium">My List</span>
+          </Link>
         </div>
       </div>
     </div>
