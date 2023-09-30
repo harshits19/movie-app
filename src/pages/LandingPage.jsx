@@ -26,9 +26,9 @@ const LandingPage = () => {
       <div className="relative z-[1]">
         <div className="absolute left-0 right-0 m-auto flex h-20 max-w-[calc(100%-3rem)] items-center justify-between text-white sm:max-w-[calc(100%-4rem)] lg:h-[5.375rem] xl:max-w-[calc(83.3%-6rem)]">
           <OGlogo classList="sm:h-20 sm:w-36 h-6 w-18 relative" />
-          <div className="flex">
-            <span className="sm:mx-4 mx-2">  
-              <select onChange={(e) => setLanguage(e.target.value)} className="h-full w-min cursor-pointer border-2 border-white bg-[rgba(0,0,0,0.08)] text-white hover:bg-[rgba(73,72,72,0.18)]">
+          <div className="flex items-center">
+            <span className="mx-2 h-min sm:mx-4">
+              <select onChange={(e) => setLanguage(e.target.value)} className="h-full w-min cursor-pointer rounded border-[1px] border-white bg-[rgba(0,0,0,0.08)] px-[5px] py-0.5 text-white hover:bg-[rgba(73,72,72,0.18)]">
                 <option value="en">{LandingPageData["en"]?.mainSection?.langSelectorText}</option>
                 <option value="hi">{LandingPageData["hi"]?.mainSection?.langSelectorText}</option>
               </select>

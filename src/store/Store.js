@@ -4,6 +4,7 @@ import DataSlice from "./DataSlice"
 import TvSlice from "./TvSlice"
 import SearchSlice from "./SearchSlice"
 import MovieSlice from "./MovieSlice"
+import LibrarySlice from "./LibrarySlice"
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     tvData: TvSlice,
     movieData: MovieSlice,
     searchData: SearchSlice,
+    libraryData: LibrarySlice,
   },
 })
 export default store

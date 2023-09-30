@@ -1,14 +1,30 @@
 import { useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { addItemToLibrary, removeItemFromLibrary } from "../store/LibrarySlice"
 import useGenres from "../hooks/useGenres"
-import { IoAddSharp as AddBtn } from "react-icons/io5"
+import { IoAddSharp as AddBtn, IoRemoveSharp as RemoveBtn } from "react-icons/io5"
 import { BsXLg as CloseBtn, BsFillPlayFill as PlayBtn, BsHandThumbsUp as LikeBtn, BsHandThumbsDown as DislikeBtn } from "react-icons/bs"
 
 const ContentPage = () => {
-  const { state } = useLocation()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const user = useSelector((store) => store.user?.user)
+  const list = useSelector((store) => store.libraryData?.data)
+  const { state } = useLocation()
   const item = state?.item
+  const type = state?.type
+  const uid = user?.userId
   const releaseDate = new Date(item?.release_date || item?.first_air_date)?.toDateString()
+  let checkState = false
+
+  if (list[uid])
+    for (const obj of list[uid]) {
+      if (obj?.item?.id === item?.id) {
+        checkState = true
+        break
+      }
+    }
 
   useEffect(() => {
     document.body.style.overflowY = "hidden"
@@ -32,7 +48,15 @@ const ContentPage = () => {
                 <PlayBtn className="h-6 w-6 md:h-8 md:w-8" />
                 Play
               </div>
-              <AddBtn className="mx-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[3px] hover:border-[#e5e5e5]" title="Add to list" />
+              {!checkState ? (
+                <div onClick={() => dispatch(addItemToLibrary({ item, type, uid }))}>
+                  <AddBtn className="mx-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[3px] hover:border-[#e5e5e5]" title="Add to list" />
+                </div>
+              ) : (
+                <div onClick={() => dispatch(removeItemFromLibrary({ item, type, uid }))}>
+                  <RemoveBtn className="mx-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[3px] hover:border-[#e5e5e5]" title="Remove from list" />
+                </div>
+              )}
               <LikeBtn className="mr-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[7px] hover:border-[#e5e5e5]" title="Like" />
               <DislikeBtn className="mr-2 h-9 w-9 cursor-pointer rounded-full border-2 border-[#ffffff80] bg-[#00000061] p-[7px] hover:border-[#e5e5e5]" title="Dislike" />
             </div>
@@ -50,7 +74,7 @@ const ContentPage = () => {
             </div>
             <div className="">
               <span className="text-gray-400">{"Genres : "}</span>
-              {useGenres(state?.type, item?.genre_ids)}
+              {useGenres(type, item?.genre_ids)}
             </div>
           </div>
         </div>
