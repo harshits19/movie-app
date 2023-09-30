@@ -41,7 +41,7 @@ const HomeVideoSection = () => {
       </div>
     </div>
   ) : (
-    <div className="ml-8 min-h-screen w-full pt-20 sm:ml-12 md:pt-36">
+    <div className="pl-8 min-h-screen w-full pt-20 sm:pl-12 md:pt-36">
       <StripeShimmer />
     </div>
   )

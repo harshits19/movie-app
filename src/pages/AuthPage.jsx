@@ -53,7 +53,7 @@ const AuthPage = () => {
         </div>
         <div className="absolute left-0 right-0 mx-4 bg-black pt-6 md:mx-10 md:bg-transparent md:pt-4">
           <Link to="/">
-            <OGlogo classList="md:h-[45px] md:w-[167px] h-8 w-18 relative" />
+            <OGlogo classList="md:h-[45px] md:w-[167px] h-8 w-18 relative z-10" />
           </Link>
         </div>
         <div className="relative min-h-screen w-full px-[5%] before:block before:h-[56px] before:content-[''] md:mx-auto md:max-w-[450px] md:bg-transparent md:px-0 md:before:h-[96px]">

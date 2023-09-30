@@ -22,7 +22,7 @@ const NavMenu = () => {
       <div className="group relative flex md:hidden">
         <div className="flex items-center">
           <span>Browse</span>
-          <span className="ml-2.5 h-0 w-0 border-x-[5px] border-b-0 border-t-[5px] border-solid border-x-transparent border-b-transparent border-t-white transition-transform duration-[367ms] ease-[cubic-bezier(.21,0,0.07,1)] group-hover:rotate-180"></span>
+          <span className="sm:ml-2.5 ml-1.5 h-0 w-0 border-x-[5px] border-b-0 border-t-[5px] border-solid border-x-transparent border-b-transparent border-t-white transition-transform duration-[367ms] ease-[cubic-bezier(.21,0,0.07,1)] group-hover:rotate-180"></span>
         </div>
         <div className="invisible absolute left-0 top-7 flex w-32 flex-col rounded  bg-[#000000e6] group-hover:visible">
           <Link to="/home/tv" className="contents">

@@ -46,12 +46,14 @@ const HomeNavbar = () => {
         <div className="flex items-center gap-x-2 md:gap-x-4 ">
           <NavSearch />
           <div className="group relative flex cursor-pointer items-center text-white">
-            {user && <img className="h-8 w-8 rounded" src={user?.photoURL} />}
-            <span className="ml-2.5 h-0 w-0 border-x-[5px] border-b-0 border-t-[5px] border-solid border-x-transparent border-b-transparent border-t-white transition-transform duration-[367ms] ease-[cubic-bezier(.21,0,0.07,1)] group-hover:rotate-180"></span>
-            <div className="invisible absolute right-0 top-[35px] z-10 w-[180px] bg-[#000000e6] transition-[visibility] group-hover:visible">
+            {user ? <img className="h-8 w-8 rounded" src={user?.photoURL} /> : <span className="h-8 w-8 rounded bg-[#1a1a1a]"></span>}
+            <span className="ml-1.5 h-0 w-0 border-x-[5px] border-b-0 border-t-[5px] border-solid border-x-transparent border-b-transparent border-t-white transition-transform duration-[367ms] ease-[cubic-bezier(.21,0,0.07,1)] group-hover:rotate-180 sm:ml-2.5"></span>
+            <div className="invisible absolute right-0 top-[35px] z-10 w-[180px] rounded bg-[#000000e6] transition-[visibility] group-hover:visible">
               <div className="flex h-full w-full flex-col py-2 text-sm font-medium">
-                <div className="cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap px-4 py-2 hover:underline">{user?.name}</div>
-                <div className="cursor-pointer px-4 py-2 hover:underline">Account</div>
+                <div className="cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap px-4 py-2">{user?.name}</div>
+                <Link to="/home/account" className="contents">
+                  <div className="cursor-pointer px-4 py-2 hover:underline">Account</div>
+                </Link>
                 <div className="cursor-pointer border-t border-[#ffffff40] px-4 py-2 text-center hover:underline" onClick={() => handleSignOut()}>
                   Sign Out
                 </div>
