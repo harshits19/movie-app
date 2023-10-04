@@ -9,10 +9,7 @@ const LandingPageSections = ({ data, first, second }) => {
         </div>
         <div className={`basis-1/2  ${first}`}>
           <div className="relative">
-            <img src={imgURL} className="w-full" />
-            <div className="absolute left-[50%] top-[46%] h-full max-h-[54%] w-full max-w-[73%] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
-              <div></div>
-            </div>
+            <img src={imgURL} className="w-full" alt="section-img"/>
           </div>
         </div>
       </div>
